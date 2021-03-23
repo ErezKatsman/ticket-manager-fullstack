@@ -30,9 +30,14 @@ export default function Ticket({ ticket }) {
       <p>{content}</p>
       <span>{userEmail}</span> | <span>{dateFormat()}</span>
       <div>
-        {labels.map((label, index) => {
-          return <span key={index}>{label}</span>;
-        })}
+        {labels &&
+          labels.map((label, index) => {
+            return (
+              <span className="label" key={index}>
+                {label}
+              </span>
+            );
+          })}
       </div>
     </div>
   );
