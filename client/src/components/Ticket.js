@@ -1,7 +1,7 @@
 import React from "react";
 
 export default function Ticket({ ticket }) {
-  const { title, userEmail, content, done, creationTime } = ticket;
+  const { title, userEmail, content, done, creationTime, labels } = ticket;
 
   const date = new Date(creationTime);
   const dateFormat = () => {
@@ -29,6 +29,11 @@ export default function Ticket({ ticket }) {
       <h3>{title}</h3>
       <p>{content}</p>
       <span>{userEmail}</span> | <span>{dateFormat()}</span>
+      <div>
+        {labels.map((label, index) => {
+          return <span key={index}>{label}</span>;
+        })}
+      </div>
     </div>
   );
 }
