@@ -9,10 +9,16 @@ const axios = require("axios");
 function App() {
   const [tickets, setTickets] = useState([]);
 
-  const fetchTickets = async () => {
-    const res = await axios.get("/api/tickets");
-    console.log(res);
+  async function show(e) {
+    const searchText = e.target.value;
+    fetchTickets(searchText);
+  }
+
+  const fetchTickets = async (searchText) => {
+    if (!searchText) searchText = "";
+    const res = await axios.get(`/api/tickets?searchText=${searchText}`);
     setTickets(res.data);
+    console.log(tickets.length);
   };
 
   useEffect(() => {
@@ -22,7 +28,7 @@ function App() {
   return (
     <div>
       <Header />
-      <SearchArea />
+      <SearchArea show={show} />
       <Tickets tickets={tickets} />
       <Footer />
     </div>

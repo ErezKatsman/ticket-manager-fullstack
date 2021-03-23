@@ -4,9 +4,8 @@ import Ticket from "./Ticket";
 export default function Tickets({ tickets }) {
   return (
     <div>
-      {tickets.map((t, index) => {
-        console.log(t.title);
-        return <Ticket ticket={t.title} key={index} />;
+      {tickets.map((ticket, index) => {
+        return <Ticket ticket={ticket} key={index} />;
       })}
     </div>
   );
