@@ -1,38 +1,101 @@
-.App {
+.header {
+  color: rgb(170, 212, 240);
+  text-align: center;
+  background-color: rgb(151, 151, 151);
+  border-radius: 100px;
+}
+
+.wix {
+  font-size: 50px;
+  font-family: "Concert One", cursive;
+  color: black;
+  font-style: italic;
+}
+
+.main-title {
+  font-family: "Concert One", cursive;
+  font-size: 100px;
+  margin-top: 40px;
+  margin-bottom: 0;
+}
+
+.main-subtitle {
+  font-size: xx-large;
+  margin-top: 0;
+  padding-bottom: 10px;
+}
+
+.search-area {
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+#searchInput {
+  /* min-width: 20%; */
+  border-radius: 100px;
+  font-size: 30px;
+  padding: 5px;
+  text-align: center;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+#searchInput:hover {
+  background-color: rgb(203, 209, 218);
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+#searchInput:focus {
+  background-color: rgb(173, 194, 221);
+  outline: none;
+}
+
+.tickets-section {
+  margin: 50px;
+}
+
+.ticket {
+  background-color: rgb(233, 233, 233);
+  padding: 0px 10px 10px 10px;
+  margin-top: 10px;
+  position: relative;
+  border-radius: 10px;
+  box-shadow: 3px 4px rgb(148, 148, 148);
+}
+
+.counter {
+  padding-bottom: 5px;
+  font-size: 20px;
+}
+
+.hideTicketButton {
+  position: absolute;
+  right: 15px;
+  bottom: 10px;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+}
+
+.hideTicketButton:hover {
+  font-weight: 600;
+  font-size: 20px;
+}
+
+.footer {
+  background-color: rgb(46, 46, 46);
   color: white;
+  text-align: center;
+  padding: 30px;
 }
 
-.App-link {
-  color: #61dafb;
+.ek-logo {
+  font-size: 80px;
+  font-family: "Concert One", cursive;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.icons {
+  margin-top: 50px;
+  display: flex;
+  justify-content: space-around;
+}
+
+i:hover {
+  color: rgb(253, 35, 35);
+  font-weight: 900;
 }

@@ -9,7 +9,7 @@ ticket.get("/", (req, res) => {
       res.json(data);
     })
     .catch(() => {
-      res.status(500).json({ message: "ops... something went wrong" });
+      res.status(500).json({ message: "oops... something went wrong" });
     });
 });
 
@@ -23,7 +23,7 @@ ticket.patch("/:ticketId/done", (req, res) => {
     .catch((err) => {
       if (err.name === "CastError")
         return res.status(400).json({ err: "invalid Id" });
-      return res.status(500).json({ err: "ops... something went wrong" });
+      return res.status(500).json({ err: "oops... something went wrong" });
     });
 });
 
@@ -38,7 +38,7 @@ ticket.patch("/:ticketId/undone", (req, res) => {
       console.log(err.message);
       if (err.name === "CastError")
         return res.status(400).json({ err: "invalid Id" });
-      return res.status(500).json({ err: "ops... something went wrong" });
+      return res.status(500).json({ err: "oops... something went wrong" });
     });
 });
 

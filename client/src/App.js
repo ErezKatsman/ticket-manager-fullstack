@@ -19,17 +19,18 @@ function App() {
   const fetchTickets = async (searchText) => {
     if (!searchText) searchText = "";
     const res = await axios.get(`/api/tickets?searchText=${searchText}`);
-    setTickets(res.data);
-    setRestoreTickets(res.data);
+    let { data } = res;
+    const arr = data.filter((el) => !hiddenTickets.includes(el._id));
+    console.log(arr);
+    setTickets(arr);
+    setRestoreTickets(data);
   };
 
-  const hide = (event) => {
-    const newTickets = tickets.filter(
-      (ticket) => ticket._id !== event.target.id
-    );
+  const hide = (ticketId) => {
+    const newTickets = tickets.filter((ticket) => ticket._id !== ticketId);
     setTickets(newTickets);
     const newHidden = hiddenTickets.slice();
-    newHidden.push(event.target);
+    newHidden.push(ticketId);
     setHiddenTickets(newHidden);
   };
 

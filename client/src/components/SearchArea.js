@@ -2,8 +2,8 @@ import React from "react";
 
 export default function SearchArea({ search }) {
   return (
-    <div>
-      <input id="searchInput" onChange={search}></input>
+    <div className="search-area">
+      <input id="searchInput" onChange={search} placeholder="search"></input>
     </div>
   );
 }

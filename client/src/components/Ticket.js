@@ -24,8 +24,20 @@ export default function Ticket({ ticket, hide }) {
     );
   };
 
+  const showHide = (bool) => {
+    return (document.getElementById(_id).hidden = bool);
+  };
+
   return (
-    <div className="ticket">
+    <div
+      onMouseOver={() => {
+        showHide(false);
+      }}
+      onMouseOut={() => {
+        showHide(true);
+      }}
+      className="ticket"
+    >
       <h3 className="ticket-title">{title}</h3>
       <p>{content}</p>
       <span>{userEmail}</span> | <span>{dateFormat()}</span>
@@ -39,7 +51,12 @@ export default function Ticket({ ticket, hide }) {
             );
           })}
       </div>
-      <span id={_id} className="hideTicketButton" onClick={hide}>
+      <span
+        hidden={true}
+        id={_id}
+        className="hideTicketButton"
+        onClick={() => hide(_id)}
+      >
         Hide
       </span>
     </div>
