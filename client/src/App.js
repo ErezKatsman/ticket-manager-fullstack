@@ -33,6 +33,11 @@ function App() {
     setHiddenTickets(newHidden);
   };
 
+  const restore = () => {
+    setTickets(restoreTickets);
+    setHiddenTickets([]);
+  };
+
   useEffect(() => {
     fetchTickets();
   }, []);
@@ -41,7 +46,12 @@ function App() {
     <div>
       <Header />
       <SearchArea search={search} />
-      <Tickets hiddenTickets={hiddenTickets} tickets={tickets} hide={hide} />
+      <Tickets
+        hiddenTickets={hiddenTickets}
+        tickets={tickets}
+        hide={hide}
+        restore={restore}
+      />
       <Footer />
     </div>
   );
