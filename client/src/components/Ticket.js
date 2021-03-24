@@ -1,7 +1,7 @@
 import React from "react";
 
-export default function Ticket({ ticket }) {
-  const { title, userEmail, content, done, creationTime, labels } = ticket;
+export default function Ticket({ ticket, hide }) {
+  const { title, userEmail, content, creationTime, labels, _id } = ticket;
 
   const date = new Date(creationTime);
   const dateFormat = () => {
@@ -26,7 +26,7 @@ export default function Ticket({ ticket }) {
 
   return (
     <div className="ticket">
-      <h3>{title}</h3>
+      <h3 className="ticket-title">{title}</h3>
       <p>{content}</p>
       <span>{userEmail}</span> | <span>{dateFormat()}</span>
       <div>
@@ -39,6 +39,9 @@ export default function Ticket({ ticket }) {
             );
           })}
       </div>
+      <span id={_id} className="hideTicketButton" onClick={hide}>
+        Hide
+      </span>
     </div>
   );
 }

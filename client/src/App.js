@@ -7,9 +7,11 @@ import React, { useEffect, useState } from "react";
 const axios = require("axios");
 
 function App() {
+  const [hiddenTickets, setHiddenTickets] = useState([]);
   const [tickets, setTickets] = useState([]);
+  const [restoreTickets, setRestoreTickets] = useState([]);
 
-  async function show(e) {
+  async function search(e) {
     const searchText = e.target.value;
     fetchTickets(searchText);
   }
@@ -18,7 +20,17 @@ function App() {
     if (!searchText) searchText = "";
     const res = await axios.get(`/api/tickets?searchText=${searchText}`);
     setTickets(res.data);
-    console.log(tickets.length);
+    setRestoreTickets(res.data);
+  };
+
+  const hide = (event) => {
+    const newTickets = tickets.filter(
+      (ticket) => ticket._id !== event.target.id
+    );
+    setTickets(newTickets);
+    const newHidden = hiddenTickets.slice();
+    newHidden.push(event.target);
+    setHiddenTickets(newHidden);
   };
 
   useEffect(() => {
@@ -28,8 +40,8 @@ function App() {
   return (
     <div>
       <Header />
-      <SearchArea show={show} />
-      <Tickets tickets={tickets} />
+      <SearchArea search={search} />
+      <Tickets hiddenTickets={hiddenTickets} tickets={tickets} hide={hide} />
       <Footer />
     </div>
   );
