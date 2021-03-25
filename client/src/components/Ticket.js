@@ -41,7 +41,7 @@ export default function Ticket({ ticket, hide }) {
       <h3 className="ticket-title">{title}</h3>
       <p>{content}</p>
       <span>{userEmail}</span> | <span>{dateFormat()}</span>
-      <div>
+      <div className="labels">
         {labels &&
           labels.map((label, index) => {
             return (

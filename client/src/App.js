@@ -47,12 +47,18 @@ function App() {
     <div>
       <Header />
       <SearchArea search={search} />
-      <Tickets
-        hiddenTickets={hiddenTickets}
-        tickets={tickets}
-        hide={hide}
-        restore={restore}
-      />
+      {tickets.length === 0 ? (
+        <div className="no-results">
+          <h1>No results</h1> <i class="fa fa-search fa-5x"></i>
+        </div>
+      ) : (
+        <Tickets
+          hiddenTickets={hiddenTickets}
+          tickets={tickets}
+          hide={hide}
+          restore={restore}
+        />
+      )}
       <Footer />
     </div>
   );
