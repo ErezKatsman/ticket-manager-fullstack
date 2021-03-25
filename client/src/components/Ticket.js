@@ -63,7 +63,10 @@ export default function Ticket({ ticket, hide, doneUndone }) {
         </button>
       </h3>
       <p>{content}</p>
-      <span>{userEmail}</span> | <span>{dateFormat()}</span>
+      <a className="mail" href={`mailTo:${userEmail}`}>
+        <span>{userEmail}</span>
+      </a>{" "}
+      | <span>{dateFormat()}</span>
       <div className="labels">
         {labels &&
           labels.map((label, index) => {
@@ -80,7 +83,7 @@ export default function Ticket({ ticket, hide, doneUndone }) {
         className="hideTicketButton"
         onClick={() => hide(_id)}
       >
-        Hide
+        <i class="fa fa-eye-slash"></i>
       </span>
     </div>
   );

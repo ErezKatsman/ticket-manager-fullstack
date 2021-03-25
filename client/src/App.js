@@ -53,7 +53,7 @@ function App() {
   };
 
   //function for the done or undone button
-  const doneUndone = (e, ticketId) => {
+  const doneUndone = (ticketId) => {
     const foundIndex = tickets.findIndex((ticket) => ticket._id === ticketId);
     if (tickets[foundIndex].done) {
       axios.patch(`/api/tickets/${ticketId}/undone`);
