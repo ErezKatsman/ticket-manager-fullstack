@@ -11,19 +11,23 @@ function App() {
   const [tickets, setTickets] = useState(["start"]);
   const [restoreTickets, setRestoreTickets] = useState([]);
 
-  async function search(e) {
+  //function for the onSeatch event in searchArea
+  const search = async (e) => {
     const searchText = e.target.value;
     fetchTickets(searchText);
-  }
+  };
 
+  //function that show the loader
   const loaderShow = () => {
     document.getElementById("loader").hidden = false;
   };
 
+  //function that hide the loader
   const loaderHide = () => {
     document.getElementById("loader").hidden = true;
   };
 
+  // function the fetch the tickets and show them on the screen
   const fetchTickets = async (searchText) => {
     if (!searchText) searchText = "";
     loaderShow();
@@ -35,14 +39,17 @@ function App() {
     setRestoreTickets(data);
   };
 
+  //function for the hide button event in ticket section
   const hide = (ticketId) => {
     const newTickets = tickets.filter((ticket) => ticket._id !== ticketId);
     setTickets(newTickets);
+    console.log(tickets);
     const newHidden = hiddenTickets.slice();
     newHidden.push(ticketId);
     setHiddenTickets(newHidden);
   };
 
+  //function for the done or undone button
   const doneUndone = (e, ticketId) => {
     const foundIndex = tickets.findIndex((ticket) => ticket._id === ticketId);
     if (tickets[foundIndex].done) {
@@ -53,6 +60,7 @@ function App() {
     fetchTickets();
   };
 
+  //function that resores the list
   const restore = () => {
     setTickets(restoreTickets);
     setHiddenTickets([]);
@@ -64,12 +72,13 @@ function App() {
 
   return (
     <div>
-      <div id="loader" class="loader"></div>
+      <div id="loader" className="loader"></div>
       <Header />
       <SearchArea search={search} />
       {tickets.length === 0 ? (
         <div className="no-results">
-          <h1>No results</h1> <i className="fa fa-search fa-5x"></i>
+          <h1 className="no-result">No results</h1>{" "}
+          <i className="fa fa-search fa-5x"></i>
         </div>
       ) : (
         <Tickets

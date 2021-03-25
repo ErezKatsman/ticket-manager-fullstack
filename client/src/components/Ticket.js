@@ -3,8 +3,9 @@ import React from "react";
 export default function Ticket({ ticket, hide, doneUndone }) {
   const { title, userEmail, content, creationTime, labels, _id, done } = ticket;
 
-  const date = new Date(creationTime);
+  //function the formats creation sime to date format
   const dateFormat = () => {
+    const date = new Date(creationTime);
     return (
       (date.getMonth() > 8
         ? date.getMonth() + 1
@@ -24,10 +25,12 @@ export default function Ticket({ ticket, hide, doneUndone }) {
     );
   };
 
+  //function for hide button => hidden toggle
   const showHide = (bool) => {
     return (document.getElementById(_id).hidden = bool);
   };
 
+  // function that return string to the class due the situation
   const isDoneClass = () => {
     if (done) {
       return "undone";
@@ -35,6 +38,7 @@ export default function Ticket({ ticket, hide, doneUndone }) {
     return "done";
   };
 
+  // function that return string to the button text due the situation
   const isDoneText = () => {
     if (!done) {
       return "undone";
@@ -54,7 +58,7 @@ export default function Ticket({ ticket, hide, doneUndone }) {
     >
       <h3 className="ticket-title">
         {title}
-        <button className="done-btn" onClick={(e) => doneUndone(e, _id)}>
+        <button className="done-btn" onClick={() => doneUndone(_id)}>
           {isDoneClass()}
         </button>
       </h3>

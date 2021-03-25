@@ -1,8 +1,10 @@
+/*Header=================================================================*/
 .header {
   color: rgb(170, 212, 240);
   text-align: center;
   background-color: rgb(151, 151, 151);
   border-radius: 100px;
+  margin: 120px 20px 0px 20px;
 }
 
 .wix {
@@ -25,12 +27,13 @@
   padding-bottom: 10px;
 }
 
+/*SearchArea=================================================================*/
+
 .search-area {
   text-align: center;
 }
 
 #searchInput {
-  /* min-width: 20%; */
   border-radius: 100px;
   font-size: 30px;
   padding: 5px;
@@ -46,9 +49,13 @@
   outline: none;
 }
 
+/*Tickets ==> [Ticket]=================================================================*/
+
 .tickets-section {
-  margin: 50px 50px 120px 50px;
+  margin: 50px;
 }
+
+/*Ticket in Tickets*/
 
 .ticket {
   background-color: rgb(233, 233, 233);
@@ -68,16 +75,13 @@
   margin: 5px;
   background: rgb(150, 150, 150);
   border-radius: 5px;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
 }
 
 .label:hover {
   background: rgb(94, 94, 94);
   color: white;
-}
-
-.counter {
-  padding-bottom: 5px;
-  font-size: 20px;
 }
 
 .hideTicketButton {
@@ -93,40 +97,29 @@
   font-size: 20px;
 }
 
-.footer {
-  background-color: rgb(46, 46, 46);
+/*counter in Tickets*/
+
+.counter {
+  padding-bottom: 5px;
+  font-size: 20px;
+}
+
+.restore {
+  background-color: rgb(83, 83, 83);
+  padding: 10px 20px;
+  border-radius: 7px;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+  border: none;
   color: white;
-  text-align: center;
-  /* padding: 30px; */
-  position: fixed;
-  bottom: 0;
-  width: 100%;
+  font-weight: 700;
 }
 
-.ek-logo {
-  font-size: 40px;
-  font-family: "Concert One", cursive;
+.restore:hover {
+  background-color: rgb(109, 126, 182);
 }
 
-.icons {
-  margin: 10px;
-  display: flex;
-  justify-content: space-around;
-}
-
-i:hover {
-  color: rgb(253, 35, 35);
-  font-weight: 900;
-}
-
-.no-results {
-  text-align: center;
-  background-color: rgb(148, 148, 148);
-}
-
-a {
-  color: aliceblue;
-}
+/*done and undone in Ticket*/
 
 .done-btn {
   background-color: rgb(123, 141, 204);
@@ -134,6 +127,8 @@ a {
   margin: 10px;
   border-radius: 3px;
   opacity: 1;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
 }
 
 .done-btn:hover {
@@ -151,6 +146,61 @@ a {
   -webkit-transition: 0.5s;
   transition: 0.5s;
 }
+
+/*Footer=================================================================*/
+
+.footer {
+  background-color: rgb(46, 46, 46);
+  color: white;
+  text-align: center;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  opacity: 0.2;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+}
+
+.footer:hover {
+  opacity: 1;
+}
+
+.ek-logo {
+  font-size: 40px;
+  font-family: "Concert One", cursive;
+}
+
+.icons {
+  margin: 10px;
+  display: flex;
+  justify-content: space-around;
+}
+
+i:hover {
+  color: rgb(253, 35, 35);
+  font-weight: 900;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+}
+
+/*no result section=================================================================*/
+
+.no-results {
+  margin: 10px;
+  padding: 20px;
+  text-align: center;
+  background-color: rgb(148, 148, 148);
+}
+
+.no-result {
+  font-size: 80px;
+}
+
+a {
+  color: aliceblue;
+}
+
+/*loader=================================================================*/
 
 .loader {
   position: fixed;

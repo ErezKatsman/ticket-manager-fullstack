@@ -13,7 +13,7 @@ export default function Tickets({
       <span className="counter">
         <span id="hideTicketsCounter">{hiddenTickets.length}</span> hidden
         tickets -{" "}
-        <button id="restoreHideTickets" onClick={restore}>
+        <button id="restoreHideTickets" className="restore" onClick={restore}>
           restore
         </button>
       </span>

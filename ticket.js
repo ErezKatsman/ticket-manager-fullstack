@@ -2,6 +2,7 @@ const { Router } = require("express");
 const Ticket = require("./ticketModel");
 const ticket = Router();
 
+// get request from api/tickets with query params
 ticket.get("/", (req, res) => {
   const { searchText } = req.query;
   Ticket.find({ title: new RegExp(searchText, "i") })
@@ -13,6 +14,7 @@ ticket.get("/", (req, res) => {
     });
 });
 
+// patch request from api/tickets to done ticket
 ticket.patch("/:ticketId/done", (req, res) => {
   const { ticketId } = req.params;
   return Ticket.findByIdAndUpdate(ticketId, { done: true })
@@ -27,6 +29,7 @@ ticket.patch("/:ticketId/done", (req, res) => {
     });
 });
 
+// patch request from api/tickets to undone ticket
 ticket.patch("/:ticketId/undone", (req, res) => {
   const { ticketId } = req.params;
   return Ticket.findByIdAndUpdate(ticketId, { done: false })
