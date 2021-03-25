@@ -123,3 +123,7 @@ i:hover {
   text-align: center;
   background-color: rgb(148, 148, 148);
 }
+
+a {
+  color: aliceblue;
+}
