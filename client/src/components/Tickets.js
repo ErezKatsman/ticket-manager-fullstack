@@ -1,7 +1,14 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import Ticket from "./Ticket";
 
-export default function Tickets({ tickets, hide, hiddenTickets, restore }) {
+export default function Tickets({
+  tickets,
+  hide,
+  hiddenTickets,
+  restore,
+  sort,
+  doneUndone,
+}) {
   return (
     <div className="tickets-section">
       <span className="counter">
@@ -10,10 +17,18 @@ export default function Tickets({ tickets, hide, hiddenTickets, restore }) {
         <button id="restoreHideTickets" onClick={restore}>
           restore
         </button>
+        <button onClick={sort}></button>
       </span>
       <div className="tickets">
         {tickets.map((ticket, index) => {
-          return <Ticket hide={hide} ticket={ticket} key={index} />;
+          return (
+            <Ticket
+              doneUndone={doneUndone}
+              hide={hide}
+              ticket={ticket}
+              key={index}
+            />
+          );
         })}
       </div>
     </div>

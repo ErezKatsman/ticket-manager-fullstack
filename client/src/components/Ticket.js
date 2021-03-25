@@ -1,7 +1,7 @@
 import React from "react";
 
-export default function Ticket({ ticket, hide }) {
-  const { title, userEmail, content, creationTime, labels, _id } = ticket;
+export default function Ticket({ ticket, hide, doneUndone }) {
+  const { title, userEmail, content, creationTime, labels, _id, done } = ticket;
 
   const date = new Date(creationTime);
   const dateFormat = () => {
@@ -28,6 +28,13 @@ export default function Ticket({ ticket, hide }) {
     return (document.getElementById(_id).hidden = bool);
   };
 
+  const isDone = () => {
+    if (!done) {
+      return "undone";
+    }
+    return "done";
+  };
+
   return (
     <div
       onMouseOver={() => {
@@ -36,9 +43,14 @@ export default function Ticket({ ticket, hide }) {
       onMouseOut={() => {
         showHide(true);
       }}
-      className="ticket"
+      className={`ticket ${isDone()}`}
     >
-      <h3 className="ticket-title">{title}</h3>
+      <h3 className="ticket-title">
+        {title}
+        <button className="done-btn" onClick={(e) => doneUndone(e, _id)}>
+          {isDone()}
+        </button>
+      </h3>
       <p>{content}</p>
       <span>{userEmail}</span> | <span>{dateFormat()}</span>
       <div className="labels">

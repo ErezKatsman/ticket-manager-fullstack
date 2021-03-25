@@ -10,7 +10,6 @@ function App() {
   const [hiddenTickets, setHiddenTickets] = useState([]);
   const [tickets, setTickets] = useState([]);
   const [restoreTickets, setRestoreTickets] = useState([]);
-
   async function search(e) {
     const searchText = e.target.value;
     fetchTickets(searchText);
@@ -21,7 +20,6 @@ function App() {
     const res = await axios.get(`/api/tickets?searchText=${searchText}`);
     let { data } = res;
     const arr = data.filter((el) => !hiddenTickets.includes(el._id));
-    console.log(arr);
     setTickets(arr);
     setRestoreTickets(data);
   };
@@ -32,6 +30,27 @@ function App() {
     const newHidden = hiddenTickets.slice();
     newHidden.push(ticketId);
     setHiddenTickets(newHidden);
+  };
+  //! not working yet
+  const sort = () => {
+    const arr = tickets.sort(function compare(a, b) {
+      const dateA = new Date(a.creationTime);
+      const dateB = new Date(b.creationTime);
+      return dateA - dateB;
+    });
+    setTickets(arr);
+    console.log(tickets);
+  };
+
+  const doneUndone = (e, ticketId) => {
+    const foundIndex = tickets.findIndex((ticket) => ticket._id === ticketId);
+    const target = e.target;
+    if (tickets[foundIndex].done) {
+      axios.patch(`/api/tickets/${ticketId}/undone`);
+    } else {
+      axios.patch(`/api/tickets/${ticketId}/done`);
+    }
+    fetchTickets();
   };
 
   const restore = () => {
@@ -49,14 +68,16 @@ function App() {
       <SearchArea search={search} />
       {tickets.length === 0 ? (
         <div className="no-results">
-          <h1>No results</h1> <i class="fa fa-search fa-5x"></i>
+          <h1>No results</h1> <i className="fa fa-search fa-5x"></i>
         </div>
       ) : (
         <Tickets
+          doneUndone={doneUndone}
           hiddenTickets={hiddenTickets}
           tickets={tickets}
           hide={hide}
           restore={restore}
+          sort={sort}
         />
       )}
       <Footer />
