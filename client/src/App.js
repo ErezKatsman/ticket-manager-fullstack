@@ -8,18 +8,29 @@ const axios = require("axios");
 
 function App() {
   const [hiddenTickets, setHiddenTickets] = useState([]);
-  const [tickets, setTickets] = useState([]);
+  const [tickets, setTickets] = useState(["start"]);
   const [restoreTickets, setRestoreTickets] = useState([]);
+
   async function search(e) {
     const searchText = e.target.value;
     fetchTickets(searchText);
   }
 
+  const loaderShow = () => {
+    document.getElementById("loader").hidden = false;
+  };
+
+  const loaderHide = () => {
+    document.getElementById("loader").hidden = true;
+  };
+
   const fetchTickets = async (searchText) => {
     if (!searchText) searchText = "";
+    loaderShow();
     const res = await axios.get(`/api/tickets?searchText=${searchText}`);
     let { data } = res;
     const arr = data.filter((el) => !hiddenTickets.includes(el._id));
+    loaderHide();
     setTickets(arr);
     setRestoreTickets(data);
   };
@@ -34,7 +45,6 @@ function App() {
 
   const doneUndone = (e, ticketId) => {
     const foundIndex = tickets.findIndex((ticket) => ticket._id === ticketId);
-    const target = e.target;
     if (tickets[foundIndex].done) {
       axios.patch(`/api/tickets/${ticketId}/undone`);
     } else {
@@ -54,6 +64,7 @@ function App() {
 
   return (
     <div>
+      <div id="loader" class="loader"></div>
       <Header />
       <SearchArea search={search} />
       {tickets.length === 0 ? (

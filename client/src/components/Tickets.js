@@ -19,6 +19,7 @@ export default function Tickets({
       </span>
       <div className="tickets">
         {tickets.map((ticket, index) => {
+          if (ticket === "start") return;
           return (
             <Ticket
               doneUndone={doneUndone}
