@@ -7,8 +7,11 @@ import React, { useEffect, useState } from "react";
 const axios = require("axios");
 
 function App() {
+  //hidden tickets arr
   const [hiddenTickets, setHiddenTickets] = useState([]);
+  //tickets arr => what actually vied on the screen
   const [tickets, setTickets] = useState(["start"]);
+  //resotre tickets arr
   const [restoreTickets, setRestoreTickets] = useState([]);
 
   //function for the onSeatch event in searchArea
