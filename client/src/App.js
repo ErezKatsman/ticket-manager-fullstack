@@ -31,16 +31,6 @@ function App() {
     newHidden.push(ticketId);
     setHiddenTickets(newHidden);
   };
-  //! not working yet
-  const sort = () => {
-    const arr = tickets.sort(function compare(a, b) {
-      const dateA = new Date(a.creationTime);
-      const dateB = new Date(b.creationTime);
-      return dateA - dateB;
-    });
-    setTickets(arr);
-    console.log(tickets);
-  };
 
   const doneUndone = (e, ticketId) => {
     const foundIndex = tickets.findIndex((ticket) => ticket._id === ticketId);
@@ -77,7 +67,6 @@ function App() {
           tickets={tickets}
           hide={hide}
           restore={restore}
-          sort={sort}
         />
       )}
       <Footer />

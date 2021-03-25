@@ -6,7 +6,6 @@ export default function Tickets({
   hide,
   hiddenTickets,
   restore,
-  sort,
   doneUndone,
 }) {
   return (
@@ -17,7 +16,6 @@ export default function Tickets({
         <button id="restoreHideTickets" onClick={restore}>
           restore
         </button>
-        <button onClick={sort}></button>
       </span>
       <div className="tickets">
         {tickets.map((ticket, index) => {

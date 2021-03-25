@@ -28,7 +28,14 @@ export default function Ticket({ ticket, hide, doneUndone }) {
     return (document.getElementById(_id).hidden = bool);
   };
 
-  const isDone = () => {
+  const isDoneClass = () => {
+    if (done) {
+      return "undone";
+    }
+    return "done";
+  };
+
+  const isDoneText = () => {
     if (!done) {
       return "undone";
     }
@@ -43,12 +50,12 @@ export default function Ticket({ ticket, hide, doneUndone }) {
       onMouseOut={() => {
         showHide(true);
       }}
-      className={`ticket ${isDone()}`}
+      className={`ticket ${isDoneText()}`}
     >
       <h3 className="ticket-title">
         {title}
         <button className="done-btn" onClick={(e) => doneUndone(e, _id)}>
-          {isDone()}
+          {isDoneClass()}
         </button>
       </h3>
       <p>{content}</p>

@@ -129,11 +129,15 @@ a {
 }
 
 .done-btn {
-  background-color: rgb(105, 114, 148);
+  background-color: rgb(123, 141, 204);
   padding: 5px 8px;
   margin: 10px;
   border-radius: 3px;
   opacity: 1;
+}
+
+.done-btn:hover {
+  background-color: rgb(150, 163, 211);
 }
 
 .done {
