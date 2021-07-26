@@ -1,8 +1,8 @@
 import React from "react";
 
-export default function Footer() {
+export default function Top() {
   return (
-    <div className="footer">
+    <div className="top_section">
       <span className="ek-logo">Erez Katsman</span>
       <div className="icons">
         <a href="https://github.com/ErezKatsman">

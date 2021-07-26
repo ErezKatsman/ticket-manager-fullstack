@@ -1,6 +1,12 @@
 import React from "react";
 
-export default function Ticket({ ticket, hide, doneUndone, labelClick }) {
+export default function Ticket({
+  ticket,
+  hide,
+  doneUndone,
+  labelClick,
+  chosenLabels,
+}) {
   const { title, userEmail, content, creationTime, labels, _id, done } = ticket;
 
   //function the formats creation sime to date format
@@ -70,6 +76,16 @@ export default function Ticket({ ticket, hide, doneUndone, labelClick }) {
       <div className="labels">
         {labels &&
           labels.map((label, index) => {
+            if (chosenLabels.find((chosenLabel) => chosenLabel == label))
+              return (
+                <button
+                  className="label chosen_label"
+                  key={index}
+                  onClick={() => labelClick(label)}
+                >
+                  {label}
+                </button>
+              );
             return (
               <button
                 className="label"

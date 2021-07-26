@@ -52,7 +52,7 @@
 /*Tickets ==> [Ticket]=================================================================*/
 
 .tickets-section {
-  margin: 50px;
+  margin: 30px 50px;
 }
 
 /*Ticket in Tickets*/
@@ -83,6 +83,10 @@
   }
 }
 
+.labels_search {
+  margin-top: 20px;
+}
+
 .labels {
   margin: 10px;
 }
@@ -99,6 +103,15 @@
 .label:hover {
   background: rgb(94, 94, 94);
   color: white;
+}
+
+.chosen_label {
+  background-color: #1b24a8;
+  color: white;
+}
+
+.chosen_label:hover {
+  background-color: #121872;
 }
 
 .mail {
@@ -169,9 +182,9 @@
   transition: 0.5s;
 }
 
-/*Footer=================================================================*/
+/*Top=================================================================*/
 
-.footer {
+.top_section {
   background-color: rgb(46, 46, 46);
   color: white;
   text-align: center;
@@ -183,7 +196,7 @@
   transition: 0.5s;
 }
 
-.footer:hover {
+.top_section:hover {
   opacity: 1;
 }
 

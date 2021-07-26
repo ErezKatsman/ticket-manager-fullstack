@@ -1,19 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import SearchLabels from "./SearchLabels";
 
-export default function SearchArea({ search, tickets, labelClick }) {
-  let labelsFromTickets = tickets.map((ticket) => ticket.labels);
-  labelsFromTickets = [].concat(...labelsFromTickets);
-  let labelsArray = [...new Set(labelsFromTickets)];
-
+export default function SearchArea({ search, labelClick, chosenLabels }) {
   return (
     <div className="search-area">
       <input id="searchInput" onChange={search} placeholder="search"></input>
-      <SearchLabels
-        labelsArray={labelsArray}
-        labelClick={labelClick}
-        tickets={tickets}
-      />
+      <SearchLabels chosenLabels={chosenLabels} labelClick={labelClick} />
     </div>
   );
 }

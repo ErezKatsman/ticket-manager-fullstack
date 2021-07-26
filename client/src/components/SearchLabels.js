@@ -1,17 +1,37 @@
-import React from "react";
+import React, { useState } from "react";
 
-export default function SearchLabels({ labelsArray, labelClick, tickets }) {
-  if (tickets[0] === "start") return <></>;
+export default function SearchLabels({ chosenLabels, labelClick }) {
+  const [labels, setLabels] = useState([
+    "Corvid",
+    "Api",
+    "Guidelines",
+    "Collapse",
+    "Expand",
+    "Login",
+    "Problem",
+    "Tutorial",
+    "View Count",
+    "All",
+  ]);
   return (
-    <div>
-      {labelsArray.map((label, i) => (
-        <button className="label" key={i} onClick={() => labelClick(label)}>
-          {label}
-        </button>
-      ))}
-      <button className="label" onClick={() => labelClick("All")}>
-        All
-      </button>
+    <div className="labels_search">
+      {labels.map((label, i) => {
+        if (chosenLabels.find((chosenLabel) => chosenLabel == label))
+          return (
+            <button
+              className="label chosen_label"
+              key={i}
+              onClick={() => labelClick(label)}
+            >
+              {label}
+            </button>
+          );
+        return (
+          <button className="label" key={i} onClick={() => labelClick(label)}>
+            {label}
+          </button>
+        );
+      })}
     </div>
   );
 }

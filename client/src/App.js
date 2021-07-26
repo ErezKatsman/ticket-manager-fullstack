@@ -1,6 +1,6 @@
 import "./App.css";
 import Header from "./components/Header";
-import Footer from "./components/Footer";
+import Top from "./components/Top";
 import SearchArea from "./components/SearchArea";
 import Tickets from "./components/Tickets";
 import React, { useEffect, useState } from "react";
@@ -14,7 +14,7 @@ function App() {
   //resotre tickets arr
   const [restoreTickets, setRestoreTickets] = useState([]);
 
-  const [labels, setLabels] = useState([]);
+  const [chosenLabels, setChosenLabels] = useState([]);
 
   //function for the onSeatch event in searchArea
   const search = async (e) => {
@@ -38,7 +38,7 @@ function App() {
     loaderShow();
 
     const res = await axios.get(
-      `/api/tickets?searchText=${searchText}&labels=${labels.join(",")}`
+      `/api/tickets?searchText=${searchText}&labels=${chosenLabels.join(",")}`
     );
     let { data } = res;
     const arr = data.filter((el) => !hiddenTickets.includes(el._id));
@@ -73,20 +73,30 @@ function App() {
     setHiddenTickets([]);
   };
 
-  const labelClick = (chosenLabel) => {
-    if (chosenLabel === "All") return setLabels([]);
-    setLabels((prevLabels) => [...prevLabels, chosenLabel]);
+  const labelClick = (label) => {
+    if (label === "All") return setChosenLabels([]);
+    if (chosenLabels.find((chosenLabel) => chosenLabel == label)) {
+      setChosenLabels(
+        chosenLabels.filter((chosenLabels) => label != chosenLabels)
+      );
+      return;
+    }
+    setChosenLabels((prevLabels) => [...prevLabels, label]);
   };
 
   useEffect(() => {
     fetchTickets();
-  }, [labels]);
+  }, [chosenLabels]);
 
   return (
     <div>
       <div id="loader" className="loader"></div>
       <Header />
-      <SearchArea search={search} tickets={tickets} labelClick={labelClick} />
+      <SearchArea
+        search={search}
+        labelClick={labelClick}
+        chosenLabels={chosenLabels}
+      />
       {tickets.length === 0 ? (
         <div className="no-results">
           <h1 className="no-result">No results</h1>{" "}
@@ -100,9 +110,10 @@ function App() {
           hide={hide}
           restore={restore}
           labelClick={labelClick}
+          chosenLabels={chosenLabels}
         />
       )}
-      <Footer />
+      <Top />
     </div>
   );
 }
