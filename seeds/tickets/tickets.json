@@ -13,7 +13,7 @@
     "userEmail": "kekikum@segtaj.gh",
     "done": false,
     "creationTime": 1545880457898,
-    "labels": ["Corvid", "Guidelines"]
+    "labels": ["Corvid", "Guidelines", "Problem"]
   },
   {
     "title": "Collapse/expand code affecting the page footer\n",
@@ -43,7 +43,8 @@
     "content": "I could have sworn that I saw reference to a new system that was in alpha testing that would allow developers to add a module to their Corvid developers system that would let them save apps, pages and widgets to help move them between sites. Now, I can't find what I remember reading. Anyone know what I am referring to?",
     "userEmail": "ozipagren@ihu.jm",
     "done": false,
-    "creationTime": 1533526556410
+    "creationTime": 1533526556410,
+    "labels": ["Corvid"]
   },
   {
     "title": "View Count & Click Count",
@@ -65,7 +66,8 @@
     "content": "I have a lightbox that queries a collection and populates a table which is linked to a dataset. When a user selects a row in the table, I want to open a second lightbox \"Delete Verification\" asking the user to confirm deleting the item.  The user selects either a Yes button or a No button which closes the \"Delete Verification\" lightbox and sets a data variable called \"confirmed\" to a value of either \"yes\" or \"no\". \nThen, the first lightbox checks this return value and if \"yes\" it calls the dataset1.remove function.\n\nThe problem is the \"Delete Verification\" lightbox does not open. Here is the pertinent code.  Note: the \"Delete Verification\" lightbox is called from several pages and it works fine. It just doesn't open when called from this particular lightbox.\n\nexport function table1_rowSelect(event) {\n //delete the selected row\n let tableRowIndex = event.rowIndex;\n    console.log(\"tableRowIndex = \" + tableRowIndex); // 2 if the third row selected\n \n //ask user to confirm before deleting the item\n    $w(\"#dataset1\").setCurrentItemIndex(tableRowIndex) // sets the dataset rowIndex\n      .then( () => {\n        console.log(\"open the lightbox asking user to confirm deletion\");\n        (wixWindow.lightbox.open(\"Delete Verification\"))  //########## THIS LIGHTBOX DOES NOT OPEN #########\n             .then( (data) => {\n let userAction = data.confirmed;\n                 console.log(\"userAction = \" + userAction);\n if (userAction === \"yes\") {\n                    $w(\"#dataset1\").remove();\n                }\n             })\n \n      } );\n}\n\n",
     "userEmail": "di@modude.mc",
     "done": false,
-    "creationTime": 1543815282858
+    "creationTime": 1543815282858,
+    "labels": ["Problem"]
   },
   {
     "title": "twilio resister otp not work",
@@ -86,14 +88,16 @@
     "content": "Hello everyone,\n\nI'm trying to sync between a software and the wix database but I have a problem when I try to make several requests. \n\nHere is my code: https://www.codepile.net/pile/zAY0d4ao\n\nHere the input in console.log :\npage : 0 loading\npage : 0 loaded\npage : 1 loading\nWhy page 1 is not loaded ? \n\nThe url is correct, no error detected.\n\nAn idea of the problem ?\n\nThanks,\n\nYannik",
     "userEmail": "mowa@puzoigi.my",
     "done": false,
-    "creationTime": 1527845968004
+    "creationTime": 1527845968004,
+    "labels": ["Problem"]
   },
   {
     "title": "CONFIRMED BUG: Background video fails to load with errors 403 and CORS",
     "content": " \nI can change with code page backgrounds with images but not with videos using $w(Document).background.src\nI'm talking about changing between stock Wix background videos in the Wix video manager, not external videos.\n\nSo with the API one can obtain the URLs for images and videos and they look like these:\nwix:image://v1/8034aa3291a54c489a7b7a3121d994f9.png/Bananas.png#originWidth=1177&originHeight=1200\n\nwix:video://v1/11062b_03c50f8fe4a34cc297a984e483a282ef/_#posterUri=/11062b_03c50f8fe4a34cc297a984e483a282eff000.jpg&posterWidth=1920&posterHeight=1080\n\nI store the URL in session storage and then reload the page.\nThen I can change the page background with this code inside the onReady():\n\n$w(\"Document\").background.src = \"wix:image:// ...\";\n\n$w(\"Document\").background.src = \"wix:video:// ...\";\n\n\nWorks for images, fails for videos.\nChrome just fails with this:\n\n \nThis lead me to believe that the URL for the video was bad.\nI spent too much time looking, testing and looking some more for an answer.\nFinally, using MS Edge, I got two different error messages that were helpful:\n\n \n and occasionally: \n \n Plugging one of the Wix video URLs into Chrome gives this 403 error: \n \nSo I have to conclude that Wix/Corvid is not allowing my Wix pages to access stock Wix videos in the Wix video manager - which should be an error on the Wix/Corvid end, not a feature.\n\nHere is a test page so you can see the error messages when requesting a change of video background:\n\n(use Chrome or MS Edge and look at console - FireFox has an error message that blocks the other messages)\nhttps://www.ualmatrix.com/clock-minimal-image \nAfter initial load click the \"Show URL\" button first so you can confirm the current video URL.Then select backgrounds from the \"Theme\" dropdown list.\nNote that the images work (page reloads and changes background image inside the onReady() ), and the videos have various failures:\nSometimes they fail with a 403 message and no backup image, and others show the backup image without an error message.\nOccasionally a CORS error pops up too.\nFull URL for Wix video background \"Ocean\"\nwix:video://v1/11062b_95d34f15761e4114a57b17823228948e/_#posterUri=11062b_95d34f15761e4114a57b17823228948ef000.jpg&posterWidth=1920&posterHeight=1080\n\nApparently, that gets converted internally by the Wix server to:\nhttps://video.wixstatic.com:443/11062b_95d34f15761e4114a57b17823228948e/1080p/mp4/file.mp4\n\nAnd since Wix thinks thinks my Wix page should not have access to that URL, it loads the poster instead (some files do and some don't):\n_#posterUri=11062b_95d34f15761e4114a57b17823228948ef000.jpg&posterWidth=1920&posterHeight=1080  \n\nTo summarize the dilemma:\nIf my Wix/Corvid pages can change stock Wix background images, then the same should also apply to stock Wix background videos. Instead, the video URLs are blocked, resulting in a 403/CORS error.\n\nSince videos are bandwidth intensive, I can see why Corvid would be careful with them, but it seems they went a bridge too far when a Wix/Corvid page cannot access Wix/Corvid stock videos.\n\nMaybe I'm overlooking something I can do on my end, but this looks very much like a problem on the Wix end of things.\n\nWix/Corvid has server settings that allow page background image changes in the onReady() part of pages. But, it prohibits page background videos to be changed the same way as the images.\n\nLooks like a Wix/Corvid system error to me (or a flawed policy), not a feature.\nSince this is a suspected bug, I sent it to tech support.\nThey told me to place the concern in the forums - the usual circular reference games.\n\nAny assistance with this matter is greatly appreciated. \n",
     "userEmail": "rujruvjiv@uw.mx",
     "done": false,
-    "creationTime": 1526445637085
+    "creationTime": 1526445637085,
+    "labels": ["Corvid", "Api", "Problem"]
   },
   {
     "title": "Dynamic Header",
@@ -121,21 +125,24 @@
     "content": "Hi,\n\nI would like to display a different lightbox according to the time of day a user is on the website.  For example, I would like to display a breakfast special until 10:30 am, a lunch special from 10:30 to 1:30 pm, and an afternoon wine special from 1:30 to 4:00 pm.\n\nCan somebody outline a script I could modify for this purpose.  I am brandnew to both Wix and Corvid.\n\nMany thanks.\n\nTed",
     "userEmail": "reglensug@zo.tk",
     "done": false,
-    "creationTime": 1545177212164
+    "creationTime": 1545177212164,
+    "labels": ["Corvid"]
   },
   {
     "title": "build a personalized feed for each user",
     "content": "Hi Corvid community, I'm trying on my site to allow members to follow each other. I followed the different posts on this forum, I managed to create a database that allows me to know who follows who. \n\nNow I would like to allow the site members to be able to follow the activities of the people they follow. For this purpose, I have a database with all the data from these members! \nBut I find myself stuck, I can't customize the repeater so that it only displays the activities of the people being monitored. I don't know how to connect all the databases to make a perfect feed for my users !\n\nI hope you can help me !  \nThank you in advance, and great job for the forum! \n\n",
     "userEmail": "tondikavu@ru.am",
     "done": false,
-    "creationTime": 1542292889192
+    "creationTime": 1542292889192,
+    "labels": ["Corvid"]
   },
   {
     "title": "Using InsertReference() for following functionality .weird error, field error?!",
     "content": "okay so essentially I want to add my current user that is logged into a multi reference field of another user once they press a follow button on that users profile.\n\nSo if I want to follow your account, I am trying to use insertReference() to insert a reference of my profile item into the followers field in your item. \n\nHere's my current code.\n\n I iterate through each item in the repeater and set its individual components to build the individual users \"mini profile\"\n\nitemdata refers to the current item.\n\n$w(\"#repeater2\").forEachItem(($item, itemData, index) => {//repeating user\n \n let belt = itemData.belt;\n\n let a=\"  | | | |  \";\n if (itemData.stripe===\"0\"){     a=\"`````````\";}\n else if (itemData.stripe===\"1\"){a=\"`|```````\";}\n else if (itemData.stripe===\"2\"){a=\"`| |`````\";}\n else if (itemData.stripe===\"3\"){a=\"`| | |```\";}\n else if (itemData.stripe===\"4\"){a=\"`| | | |`\";}\n\nhere i'm setting their profile up. nothing special\n            $item('#repeatedName').text=itemData.name;\n            $item('#repeatedProfilePic').src=itemData.photoProfile;\n            $item('#repeatedContainer').src=itemData.photoCover;\n            $item('#repeatedBoxBelt').style.backgroundColor = session.getItem(belt);\n            $item('#repeatedStripes').text = a;\n \n            $item('#repeatedFollowButton').onClick((event)=>{\nwhen the button is pressed i call the following function which i have created and i pass in the current profiles itemData\n                followUser(itemData);\n            });\n        });\n\n\nexport function followUser(itemData){\n //must add current user(logged in user) to selected users followers\n //inserts a reference to the item with ID of the current user in the followers field of the item in the USER_ProfileData collection with the ID of the selected user(the one the current user wants to follow).\n\n    wixData.insertReference(\"USER_ProfileData\", \"followers\", itemData._id, wixUsers.currentUser.id)\n    .then( () => {\n        console.log(\">Reference inserted \");\n    } )\n    .catch( (error) => {\n\n        console.log(error);\n    } );\n}\n\nWhen I press the follow button I am getting the following printed to the console.\n\n Error: Provided relationshipAttribute [followers] is not a multi-reference field. \nThe field is in fact a multi reference field...\n\njust in case you want to look around. HERES THE LINK!\nwww.grapplehub.net\n\nTHIS PROBLEM HAS BEEN BUGGING ME FOR A LONG TIME!! ANY ADVICE IS VERY MUCH APPRECIATED!\n\n\n",
     "userEmail": "kuebemic@ufvewed.gi",
     "done": false,
-    "creationTime": 1538861834942
+    "creationTime": 1538861834942,
+    "labels": ["Problem"]
   },
   {
     "title": "Making a dynamic sum based on user ",
@@ -163,21 +170,24 @@
     "content": " \nHello!\nI'm looking for an orientation. If I'm not in the proper place feel comfortable to delete.\nI want to create a plataform or something in this way where I could connect a service to a visitor; acting between many professionals that will constantly update their content and possible clients (visitors until then), intermediating both.\nSo for that I was thinking in use a database linked to dynamic pages and offering a possibility to the visitor to hire that service in a automated way through the website.\nIs that a possible and good a ideia to do in the plataform? Do you suggest using Corvid for any function or the editor is enough? It should fit well in a member's area? Suggestions are very welcome. https://192168ll.onl/ https://xender.vip/ https://testmyspeed.onl/\nThanks in advance!",
     "userEmail": "he@cud.mc",
     "done": false,
-    "creationTime": 1518074759400
+    "creationTime": 1518074759400,
+    "labels": ["Corvid"]
   },
   {
     "title": "How to code a button to redirect users to another page when clicked",
     "content": "Hi, I am wondering how I would be able to code a button using the coding feature in corvid to redirect a user to another page on my website. I've looked around and have tried a lot of stuff to no avail. This is in attempt to find a solution to the issue where users are not redirected to another website page after submitting a payment forum, which I understand is a current issue being worked on. \n#code #button #easy ",
     "userEmail": "zadazid@rekucu.gs",
     "done": false,
-    "creationTime": 1534757469383
+    "creationTime": 1534757469383,
+    "labels": ["Corvid"]
   },
   {
     "title": "User button upload limited dimension and refresh",
     "content": "Hi everyone,\nI am trying to write the code to limit the size of the image file that User can upload and refresh the photo after loaded. \nCan you please tell me where I'm wrong and what's missing? In fact doesn't works good and show me problem with \"size\"\n\nThanks in advance, as always\n\n\n \nexport function BBrochureUpload_change(event) { .    //button to upload event\n let mySizeLimit = 2000;     //Mb limited\n let files = $w(\"#BBrochureUpload\").value;       //button to upload\n let fileSize = files[0].size;\n if (fileSize < mySizeLimit) {\n        $w(\"#BBrochureUpload\").startUpload()\n        .then((uploadedFile) => {\n                        $w(\"#image1\").expand();       // images show after upload\n                    })\n                    .catch((uploadError) => {\n                        console.log(`File upload error: ${uploadError.errorCode}`);\n                    });\n            } else {\n                $w(\"#image1\").collapse();    \n                $w(\"#TLimited\").show();    // write \" Image to large to upload\"\n   }\n",
     "userEmail": "ocuvu@nur.mx",
     "done": false,
-    "creationTime": 1524696676869
+    "creationTime": 1524696676869,
+    "labels": ["Collapse", "Problem"]
   },
   {
     "title": "Calling a module from job scheduler",
@@ -205,7 +215,8 @@
     "content": "Is there an issue with Corvid at the moment, unable to call any databases or add new ones in the editor currently. \n\nThanks \nChris Silvester ",
     "userEmail": "jezgek@tokcu.be",
     "done": false,
-    "creationTime": 1538131141483
+    "creationTime": 1538131141483,
+    "labels": ["Corvid"]
   },
   {
     "title": "Share website template through link ",
@@ -219,7 +230,8 @@
     "content": "Hello. I'm trying to do what the OP was asking for on this thread:\nhttps://www.wix.com/corvid/forum/community-discussion/stop-this-slideshow\n\nUnlike him, I AM using the standard slideshow feature, and identical to him, would like the slideshow to stop after the 3rd slide and not continue to loop.\n\nI used the code suggested, and changed my id:\n$w.onReady(function () {\n    $w(\"#heroslider\").onChange((event, $w) => {\n let currentIndex = event.target.currentIndex; // 3\n \n if(currentIndex === 3){\n            $w(\"#heroslider\").pause();\n        }\n    });\n});\n\n\nHowever, the code is not working.\nSince the discussion on the previous thread continue to fix a Gallery issue, I'm re-starting this question to ask for help troubleshooting the slideshow issue. \n\nThank you!\n\n",
     "userEmail": "zulmuw@ra.mx",
     "done": false,
-    "creationTime": 1541961841343
+    "creationTime": 1541961841343,
+    "labels": ["Corvid"]
   },
   {
     "title": "Automatic custom payment return to the customer",
@@ -254,7 +266,8 @@
     "content": "Hi everyone, I am a  newbie to using Wix Corvid.\nI would like to set coding from http:// domain.com/coverage?query= \"word\"\nthan the result will out put to repeater in same page, the \"word\" will show off on search bar.\n\nmy edit coding in following, please help and thx a lot\n\n \nimport {local} from 'wix-storage';\nimport wixData from 'wix-data';\n\n$w.onReady(function () {\n\n var sameWord = local.getItem(\"searchWord\");\n\n    $w(\"#input1\").value = sameWord;\n    $w(\"#input1\").placeholder = sameWord;\n    $w('#dataset1').onReady(function () {\n\n        search();\n    });\n\n});\n\n\nexport function searchButton_click() {\n\n    search();\n\nlet SearchValue = $w(\"#input1\").value;\n$w(\"#dataset1\").setFilter(wixData.filter().contains('subTitle', SearchValue).or(wixData.filter().contains('zone', SearchValue).or(wixData.filter().contains('description', SearchValue))));\n}\n \nfunction search() {\n\n    wixData.query('name')\n   .contains('name', $w(\"#input1\").value)\n   .or(wixData.query('name').eq('description', $w(\"#input1\").value))\n\n      .find()\n       .then(res => {\n  $w('#repeater1').data = res.items;\n\n    });\n\nlet SearchValue = $w(\"#input1\").value;\n$w(\"#dataset1\").setFilter(wixData.filter().contains('subTitle', SearchValue).or(wixData.filter().contains('zone', SearchValue).or(wixData.filter().contains('description', SearchValue))));\n\n}\n\n",
     "userEmail": "sijjo@ih.ng",
     "done": false,
-    "creationTime": 1529854178644
+    "creationTime": 1529854178644,
+    "labels": ["Corvid"]
   },
   {
     "title": "Progressive Web Apps (PWA)",
@@ -296,7 +309,8 @@
     "content": "Hello,\n3 problems with the Multilingual feature:\n1. In a form, when I change alignment from left to right in one language, it changes in the other language as well\n2. When moving an image in 1 version, it automatically moves it in the other one\n3. Same thing with the header - changing location of a link affects both versions\n\nHow do I disconnect these features from both language so they will be independent?",
     "userEmail": "fal@gac.gg",
     "done": false,
-    "creationTime": 1517154367382
+    "creationTime": 1517154367382,
+    "labels": ["Problem"]
   },
   {
     "title": "How to add Venmo to my checkout page?",
@@ -310,14 +324,16 @@
     "content": " \nHi Everyone,\nI found great tutorials about how to send emails with GMAIL API from Javascript. \n\nTake a look:\nhttps://www.sitepoint.com/sending-emails-gmail-javascript-api/\n\nhttps://stackoverflow.com/questions/36946490/sending-email-from-my-javascript-app-via-gmail-api-mail-appears-in-gmail-sent\n\nBest,\n-Luigi\n",
     "userEmail": "ju@ovoba.tt",
     "done": false,
-    "creationTime": 1539731043907
+    "creationTime": 1539731043907,
+    "labels": ["Api", "Tutorial"]
   },
   {
     "title": "Color Picker?",
     "content": "Need a standard color Picker (with n palettes) on a (Corvid) form (like 5 colums across, n down). Table Component cannot do cell colors, Repeater cannot do 5 (or whatever) colors per row, then continue on next row. So it looks like the html-component is the only option.\nAny of you forum geniuses have a better design idea?\n\nEDIT: on second thought, maybe it can be done with a repeater. Put 5 boxes on a row, all hidden;onload, get palette, do some calculations and fill n rows. Any other ideas?",
     "userEmail": "ibozwi@je.bd",
     "done": false,
-    "creationTime": 1531020628256
+    "creationTime": 1531020628256,
+    "labels": ["Corvid"]
   },
   {
     "title": "Parallax Feature on Mobile",
@@ -359,7 +375,8 @@
     "content": "hey,\nI have some problem, i try to find solution on web or here in search but no results\nlook at the video and see the code.\nwhen i hover container in\nRepeater fast its stuck on hover mode.\n\n \n\n   $w('#dataset2').onReady(() => {\n        $w('#CatgContainer').onMouseIn((event) => {\n let $item = $w.at(event.context);\n            $item('#boxCategoryHover').show(\"float\", floatOptions);\n        })\n\n        $w('#CatgContainer').onMouseOut((event) => {\n let $item = $w.at(event.context);\n            $item('#boxCategoryHover').hide(\"float\", floatOptions);\n        })\n    })\n",
     "userEmail": "afuud@em.nc",
     "done": false,
-    "creationTime": 1544409943384
+    "creationTime": 1544409943384,
+    "labels": ["Problem"]
   },
   {
     "title": "How to create Waiting List in Registration",
@@ -380,14 +397,16 @@
     "content": "I have a members area on my site which people can create an account via the standard username/password which gets saved in the Wix CRM (PrivateMembersData collection). After they click submit to create the account, it automatically takes them to another page which has form fields connected to my 2nd database which are used to create their dynamic profile page. The 2nd database has a reference field which points back to the 'loginEmail' column of the PrivateMembersData collection. \n\nThe problem I'm having is that when the member fills out the form (2nd database), all their data gets saved correctly, but the reference field ('loginEmail') is left blank. Unless I manually go in and set it via the Wix Live Database manager. [SCREENSHOT BELOW]\n\nHow can I have the users' loginEmails get automatically passed to the 2nd database so that I don't have to do this manually?\n\nBecause if a user logs out and logs back in, they're unable to see their data as the connection from PrivateMembersData and the 2nd database is broken, when this field is blank for their row.\n\nThanks in advance!\n\n \n",
     "userEmail": "wu@bomisva.bm",
     "done": false,
-    "creationTime": 1539011605825
+    "creationTime": 1539011605825,
+    "labels": ["Login", "Problem"]
   },
   {
     "title": "Wix Users (and more?) is down",
     "content": "Is anyone else experiencing this? Login and signup aren't working in my sites, and I am logging server errors. Wix Support (what a misnomer!) is absolutely a waste of time.\nHow often does this happen?",
     "userEmail": "le@co.jo",
     "done": false,
-    "creationTime": 1539262437742
+    "creationTime": 1539262437742,
+    "labels": ["Login"]
   },
   {
     "title": "pagination with code for search results",
@@ -401,7 +420,8 @@
     "content": "I'm trying to recreate this feature: https://www.gulfstream.com/, where the logo (Gulfstream) changes into the icon as you scroll down. I have the icon in a white box that covers the main logo, which is \"collapsed on load\". What code do I need to add to get this to work? Site link here: https://pauledesign.wixsite.com/airspace",
     "userEmail": "cera@azze.ye",
     "done": false,
-    "creationTime": 1540354738287
+    "creationTime": 1540354738287,
+    "labels": ["Collapse"]
   },
   {
     "title": "Charge customers if they are choosing Manual Payments",
@@ -429,7 +449,8 @@
     "content": "Hello,\n\nThis seems very basic, but for some reason I can't get it to work.   I want the Onclick for button 60 to be called only if the if statement is valid (input10 has text).\n\n\n\n \n\n\n\nI have tried many ways, and I simply can't get it to work.  However, the onclick event happens without the if statement.\n\n  ($w('#input10').value.length >= 8) \n  ($w('#input10').value !== \"\") \n  ($w('#input10').value === true) \n\n\nhere is the code block that doesn't seem to work :\n\n\n\n \nif \n        ($w('#input10').value.length >= 8) \n{\n  $w('#button60').onClick((event) => {\n\n let user = wixUsers.currentUser;\n let isLoggedIn = user.loggedIn;\n if (!isLoggedIn) {\n      wixUsers.promptLogin().then(() => {\n       processPlan(planId, planPrice);\n     })\n  } else {\n      processPlan(planId, planPrice);\n    }\n }\n );\n\n}\n\n\n\n\nThe code for the entire page:\n\n\n\n \nimport wixLocation from 'wix-location';\nimport wixWindow from 'wix-window';\nimport wixPay from 'wix-pay';\nimport wixPaidPlans from 'wix-paid-plans';\nimport wixUsers from 'wix-users';\n\n\n$w.onReady(function () {\n\n const currentPlanObject = $w(\"#dynamicDataset\").getCurrentItem();\n const planId = currentPlanObject._id;\n const planPrice = currentPlanObject.price;\n\n\nif \n        ($w('#input10').value.length >= 8) \n{\n  $w('#button60').onClick((event) => {\n\n let user = wixUsers.currentUser;\n let isLoggedIn = user.loggedIn;\n if (!isLoggedIn) {\n      wixUsers.promptLogin().then(() => {\n       processPlan(planId, planPrice);\n     })\n  } else {\n      processPlan(planId, planPrice);\n    }\n }\n );\n\n}\n \n\n});\n\nfunction processPlan(myId) {\n\n \n    wixPaidPlans.purchasePlan(myId).then(orderObject => {\n      wixWindow.openLightbox(\"Contact1\", orderObject)\n       .then((goForIt) => {\n if (goForIt) {\n         wixPay.startPayment(orderObject.wixPayOrderId);\n       }\n      });\n    })\n \n}\n\n\n\n\nPlease help!  I hope it's just some small mistake I made.\n\nThanks in advance!\n",
     "userEmail": "guecipe@mot.va",
     "done": false,
-    "creationTime": 1527893000051
+    "creationTime": 1527893000051,
+    "labels": ["Login"]
   },
   {
     "title": "Create multi-page form connected to database",
@@ -457,7 +478,8 @@
     "content": "Hi!\n\nI'am trying to figure out how to add multiple show-more links. I'am not super into code so don't blame me, I tried hahah. This is the code I got so far but issn't working.\n\nlet fullText; // variable to hold the full text\nlet shortText; // variable to hold the short version of the text\n\n$w.onReady(function () {\n // how many characters to include in the shortened version\n const shortTextLength = 1000;\n // read the full text and store it in the fullText variable\n    fullText = $w(\"#text6\").text;\n // grab the number of characters defined in shortTextLength and store them in the shortText variable\n    shortText = fullText.substr(0, shortTextLength) + \"...\";\n // set the contents of the text element to be the short text\n    $w(\"#text6\").text = shortText;\n\n});\n\nexport function button2_click(event) {\n // check the contents of the text element \nif ($w(\"#text6\").text === shortText) {\n // if currently displaying short text, display the full text\n    $w(\"#text6\").text = fullText;\n    $w(\"#button2\").label = \"Minder\";    \n} else {\n // if currently displaying full text, display the short text\n    $w(\"#text6\").text = shortText;\n    $w(\"#button2\").label = \"Lees meer...\";\n}\n}\n\n\n$w.onReady(function () {\n // how many characters to include in the shortened version\n const shortTextLength = 1000;\n // read the full text and store it in the fullText variable\n    fullText = $w(\"#text1\").text;\n // grab the number of characters defined in shortTextLength and store them in the shortText variable\n    shortText = fullText.substr(0, shortTextLength) + \"...\";\n // set the contents of the text element to be the short text\n    $w(\"#text1\").text = shortText;\n\n});\n\nexport function button1_click(event) {\n // check the contents of the text element \n if ($w(\"#text1\").text === shortText) {\n // if currently displaying short text, display the full text\n        $w(\"#text1\").text = fullText;\n        $w(\"#button1\").label = \"Minder\";\n    } else {\n // if currently displaying full text, display the short text\n        $w(\"#text1\").text = shortText;\n        $w(\"#button1\").label = \"Lees meer...\";\n    }\n}\n\n\nI found this link: https://support.wix.com/en/article/wix-code-tutorial-creating-a-show-more-link\nwhich works perfectly with one text and one button but when I copy the code to make another show-more link (for #text6 and #button2) the text box (#text6) shows the content of text1 after clicking the \"Lees meer...\" button (#button2).\n\n",
     "userEmail": "cuale@dow.cx",
     "done": false,
-    "creationTime": 1521885644940
+    "creationTime": 1521885644940,
+    "labels": ["Tutorial"]
   },
   {
     "title": "Bypass on Multi-step forms with arrow key",
@@ -485,14 +507,16 @@
     "content": "Hello, when using multilingual on the Wix platform, and when you make the modification to the English version gets a direct change to the Arabic version, for example when modifying the direction of the basic menu elements in the English version to become left to right, the direction of the elements in the Arabic version also becomes Left to right! How do I solve this problem?",
     "userEmail": "mif@jo.tc",
     "done": false,
-    "creationTime": 1524362604686
+    "creationTime": 1524362604686,
+    "labels": ["Problem"]
   },
   {
     "title": "Call a Fullstory function when form submits",
     "content": "Hi\n\n\nI want to call a Fullstory function (FS.setUserVars) when I submit a form on my Wix page, using data from the form fields. I couldn't find a way to do it using corvid, and the Fullstory app integration is just for the basic tracking code, not for custom user variable recording.\n\n\nThanks!",
     "userEmail": "bed@voroz.cu",
     "done": false,
-    "creationTime": 1515742554251
+    "creationTime": 1515742554251,
+    "labels": ["Corvid"]
   },
   {
     "title": "Making an auction site (SOLVED)",
@@ -506,7 +530,8 @@
     "content": "I have two booking systems, Wix and back-office applications. I need to sync them periodically. My questions are:\n\n1. where Wix keeps out the box booking database with appointments, as I see Schedule, Services and Staff db's only? I need to read these appointments and send them to 3rd party API for processing.\n\n2. How do I create new appointments programmatically by inserting new records into Wix appointment db, which is actually not presented in the Wix database structure?\n\n3. Can I create custom database for my Wix appointments and make Wix out the box booking application to work with this custom database?\n\n\n \n",
     "userEmail": "tifgibfaz@haval.nr",
     "done": false,
-    "creationTime": 1541831651547
+    "creationTime": 1541831651547,
+    "labels": ["Api"]
   },
   {
     "title": "Follow Users",
@@ -548,7 +573,8 @@
     "content": "Hello all,\n\nI'm building a website that allows users to search for a company based on the name and returns the results in a table. I would then like to link the search results to a dynamic page that provides more details of the company.\n\nI've added the database of companies and built the search function and table based on the following code:\n\n\n \n\nThis gives the following results on the site when searching for \"Smith\":\n\n\n \nI'm now trying to link this results table to a dynamic page so that when a row is selected and clicked the user will be taken to a page containing more detailed information about the company.\n\nI've found the following code in the Forum which I think will achieve this:\n\n\n \n\nUnfortunately I'm a world-class beginner at website coding and I have no idea what code to enter for this line as I don't know the syntax for my dynamic page:\n\n wixLocation.to(`${myRow[link-myDynamicPage-_id]}`); \n\nIs the code above the correct code to use for what I am trying to achieve (ie linking my search results to a dynamic page)?\n\nI'd also like the information that appears on the dynamic page to appear as a table with the headings along the left-hand side. I can only find tables that have headings across the top and as there are 20 fields of data this is impractical for displaying the information. My current dynamic page just had text fields for the results but this is quite cumbersome:\n\n\n\n\n \n\n\nSorry this turned into such a long post! I'd be really grateful for some assistance as I'm a little lost with this problem.\n\nThanks so much in advance,\nHuw\n\n\n",
     "userEmail": "pees@acgiew.mk",
     "done": false,
-    "creationTime": 1520744679957
+    "creationTime": 1520744679957,
+    "labels": ["Problem"]
   },
   {
     "title": "Is there any ways to calculate in database cells?",
@@ -569,7 +595,8 @@
     "content": "I used this code to retrieve the information of a member from a custom dataset but instead it is returning the same data in all member account. My intent is to return only the member data log in.\nNeed help please\nimport wixUsers from 'wix-users';\nimport wixdata from 'wix-data'\n$w.onReady(function () {\n  wixUsers.onLogin((user) => {\n let userId = user.id; // \"r5cme-6fem-485j-djre-4844c49\"\n let isLoggedIn = user.loggedIn; // true\n if (wixUsers.currentUser.loggedIn) {\n      user.getEmail()\n        .then((email) => {\n let userEmail = email; // \"user@something.com\"\n          $w(\"#MemberPlanDataset\").onReady(() =>\n            user.getMemberPlanDataset()\n            .then((MemberPlanDataset) => {\n let UserPlan = MemberPlanDataset;\n let Myemail = UserPlan.email;\n if ((userEmail) === UserPlan.email) {\n let MyPlan = UserPlan.Plan;\n let MyPrix = UserPlan.Prix;\n let MyStatut = UserPlan.Statut;\n let MyValidite = UserPlan.validite;\n              } else {\n                $w(\"#box18\").show();\n\n              }\n\n            }));\n        });\n    }\n  });\n});",
     "userEmail": "bi@ridlehle.cr",
     "done": false,
-    "creationTime": 1517745897676
+    "creationTime": 1517745897676,
+    "labels": ["Login"]
   },
   {
     "title": "Responsive Site Layout",
@@ -590,21 +617,24 @@
     "content": "Hi,\n\nI have the following components on a Dynamic Page:\n\nTable (ID = table1, populated by dynamicDataset, title contains names of places)\nGoogle Map (ID = googlemap1, should show the location of the Current Item title) \n\nIm trying to show the location of the current item title (.getCurrentItem().title) on the map when  its displayed in the viewable part of the current window (onViewportEnter).\n\nUsing this example as a stating point: How to Use Google Maps Services in Wix Code \nAnd this Places API Guide\n\n\nI have google API and enabled the Places API.\n\nI created a web module (backend) file named gapi.jsw\nIn that file, web modules which will be used to call the Google Maps online service functions.\nimport {fetch} from 'wix-fetch';\nconst key = \"Crazy-long_Google_API-key\"; // My own API key is here\n\n// Retrieve details of the selected location\nconst dpart1 = \"https://maps.googleapis.com/maps/api/place/details/json?\";\nconst dpart2 = \"&key=\";\n// this function is triggered when clicking on a suggestion list repeater item\nexport function details(id) {\n    let placeid = \"placeid=\" + id;\n    let url = dpart1 + placeid + dpart2 + key;\n    return fetch (url, {method: 'get'}).then( (httpResponse) => { \n        if (httpResponse.ok) {      \n            return httpResponse.json(); \n        }\n    });\n}\n\n\n    3. In the Map page i added the following code, \nimport wixWindow from 'wix-window';\nimport {local} from 'wix-storage';\nimport {details} from 'backend/gapi';\n\n//this function is triggered when the map is displayed in the viewable part of the current window (onViewportEnter)\nexport function location_title() {\n    let place_id = $w('#dynamicDataset').getCurrentItem().title;\n    set_details(place_id);\n}\n\n     4. The set_details( ) function need to be adjusted to my needs. Since am using Place and not address (as in the example) i assume the Fields need to be changed from address_components (as country or city) to geometry/location. Furthermore, the example using a text input and repeater which i don't.  Here is the original code from the link above with :\n\n/* This function calls the details() web module to retrieve the details (city, country, utc, etc) of the selected or saved location. */\n\nfunction set_details(val) {\n    details(val).then(function(resp) {\n    \t// find the city (locality) and country of the location\n        let place = resp.result;\n        var filtered_array = place.address_components.filter(function(address_component){\n            return address_component.types.includes(\"country\");\n        }); \n        var country = filtered_array.length ? filtered_array[0].long_name: \"\";\n        filtered_array = place.address_components.filter(function(address_component){\n            return address_component.types.includes(\"locality\");\n        }); \n        var locality = filtered_array.length ? filtered_array[0].long_name: \"\";\n console.log(\"details: \" + locality);\n \n        let name = place.formatted_address;\n        let id = place.place_id;\n        let utc = place.utc_offset;\n        let lat = place.geometry.location.lat;\n        let lng = place.geometry.location.lng; \n\n        // save the details of the location with wix-storage\n        local.setItem(\"place_city\", name);\n        local.setItem(\"place_lat\", lat);\n        local.setItem(\"place_lng\", lng);\n        local.setItem(\"place_utc\", utc);\n        local.setItem(\"place_id\", id);\n        $w(\"#input1\").value = name; // set input field to location\n   \n        // array of location detail items for the repeater\n        let detailsList = \n        [\n            {\n                \"_id\": \"1\",\n                \"text3\": \"place name\",\n                \"text4\": name\n            },\n            {\n                \"_id\": \"2\",\n                \"text3\": \"latitude\",\n                \"text4\": \"\" + lat\n            },\n            {\n                \"_id\": \"3\",\n                \"text3\": \"longitude\",\n                \"text4\": \"\" + lng\n            },\n            {\n                \"_id\": \"4\",\n                \"text3\": \"utc\",\n                \"text4\": \"\" + utc\n            },\n            {\n                \"_id\": \"5\",\n                \"text3\": \"place id\",\n                \"text4\": id\n            }   \n        ];   \n\n        // set the details repeater data and show it\n        $w(\"#repeater2\").data = detailsList; // add data to our repeater\n        $w(\"#repeater2\").show();\n    }); \n}\n\nWill appreciate your help in adjusting the code for my needs.\n\nTHANX  : )\n",
     "userEmail": "luva@dod.aq",
     "done": false,
-    "creationTime": 1541487833522
+    "creationTime": 1541487833522,
+    "labels": ["Api", "Guidelines"]
   },
   {
     "title": "Problem with the integration of iFrame ",
     "content": "I have tried to intregrate the following link by seeting an iFrame on our website:\n\n <script type=\"text/javascript\" src=\"https://myconvento.com/assets/system/js/external/iframeResizer.min.js\"></script>\n<script type=\"text/javascript\" charset=\"utf-8\" data-id=\"4239\" data-c=\"0\" id=\"newsroom_embedded_js\">\n    (function () {\n        var script = document.createElement(\"script\");\n        script.type = \"text/javascript\";\n        script.async = true;\n        script.src = \"https://myconvento.com/assets/system/js/external/newsroom_embedded.js.php\";\n        var i = document.getElementsByTagName(\"head\")[0];\n        i.parentNode.insertBefore(script, i);\n    })();\n</script>\n\nUnfortunately there only appears a white screen. Is there a problem with the link? We got the link from a company whose webbased software we are using for publishing our press relations.\n\nMaybe somebody knows what is going wrong.\n\nThanks in advance.",
     "userEmail": "cirbes@le.in",
     "done": false,
-    "creationTime": 1516208233633
+    "creationTime": 1516208233633,
+    "labels": ["Problem"]
   },
   {
     "title": "Lightboxes are so slow",
     "content": "I know it's already been discussed here so many times, but it's just can't be acceptable.\nOpening lightboxes on mobile is just too slow.\nIt's doesn't make sense that you have to wait more than a second for it to pop up (on some of the most advanced cellphones).\nOn iPhones, it's relatively OK (far from being perfect though). but on Android it's just doesn't fit to the current decade standards.\nTo make it clear -  I'm talking about triggered lightboxes (so the delay settings on the editor is irrelevant). + It's much more noticeable, if you pass some data (even a small object) to it.\n\nWhenever it's possible, I use collapsed-expanded boxes instead, but when it's not, I'm helpless.\n\nAny idea/workaround/advice will be welcomed.\nThanks,\nJ.D.\n ",
     "userEmail": "vo@ujokurod.ag",
     "done": false,
-    "creationTime": 1539441037407
+    "creationTime": 1539441037407,
+    "labels": ["Collapse", "Expand"]
   },
   {
     "title": "Fade out text box",
@@ -653,7 +683,8 @@
     "content": " \nHi folks, Thanks to everyone that is so very helpful on this forum, it has helped my journey to be a little more competent with the coding on my site. \nI have been trying to expand my Wix code knowledge and increase the efficiency on the site, one area that seems to have lots of code across many pages (the same dropdowns use this code) I have around 3 for this particular input. I was wondering if it would be possible if anyone could change my thinking? Could I code it backend to reduce the code on the pages?\n\nThank you!\n\nwixData.query('dropdownPopulation')\n            .ascending(\"courseName\")\n            .find()\n            .then(res => {\n let options = [{\n \"value\": '',\n 'label': 'All Courses'\n                }];\n                options.push(...res.items.map(title => {\n return {\n 'value': title.title,\n 'label': title.title\n                    };\n                }));\n                $w('#coursenamedropdown').options = options;\n            });\n\n let opts = $w(\"#durationdropdown\").options;\n        opts.unshift({\n 'value': '',\n 'label': 'All Durations'\n        });\n        $w(\"#durationdropdown\").options = opts;\n\n let opts2 = $w(\"#dropdownDifficulty\").options;\n        opts2.unshift({\n 'value': '',\n 'label': 'All Grades'\n        });\n        $w(\"#dropdownDifficulty\").options = opts2;\n\n let opts3 = $w(\"#regionDropdown\").options;\n        opts3.unshift({\n 'value': '',\n 'label': 'All Regions'\n        });\n        $w(\"#regionDropdown\").options = opts3;\n let opts4 = $w(\"#CourseAccomodationDropdown\").options;\n        opts4.unshift({\n 'value': '',\n 'label': 'Anywhere will do'\n        });\n        $w(\"#CourseAccomodationDropdown\").options = opts4;\n\n    }\n",
     "userEmail": "kafujca@agi.mo",
     "done": false,
-    "creationTime": 1519366601733
+    "creationTime": 1519366601733,
+    "labels": ["Expand"]
   },
   {
     "title": "-  SOLVED  - \nSpeed up page transitions via wixLocation",
@@ -681,21 +712,24 @@
     "content": " How do you make a fetch post request with params to an external api ? ",
     "userEmail": "ji@tasbud.mn",
     "done": false,
-    "creationTime": 1517287800450
+    "creationTime": 1517287800450,
+    "labels": ["Api"]
   },
   {
     "title": "Embed HTML code directly (without iframe)",
     "content": "I’m using PressPlay2 video player, and when I embed the code using the HTML element, my video doesn’t play correctly. The problem seems to be with how the code is embedded in the page - including the embed code as an html page hosted on filesusr.com  and using an iframe to pull in that html page.\nIs there a different way to embed the video directly onto my wix site, rather than with the iframe method?\nHere’s one example of the code I’m trying to embed:\n<div id=\"ppdiv_2132813\"  class=\"pp-video-container\"  style=\"width: 100%;height: auto;\"></div><script type=\"text/javascript\" src=\"https://s3.amazonaws.com/press-play-v2/2127044/2132813/outer.js\"></script>",
     "userEmail": "foflad@sa.py",
     "done": false,
-    "creationTime": 1522270479473
+    "creationTime": 1522270479473,
+    "labels": ["Problem"]
   },
   {
     "title": "The googlemap API doesn't properly render when site is published",
     "content": "I've used the google map component successfully for many months. I have a valid google API key that works to get me locations based on a street address which I then pass to the google map component and it has properly rendered the map -- until a few days ago. Everything looks fine in preview mode, but when I publish a site, it fails to work. What happens is that the map comes up and displays the location of the Wix Office. I know that google is returning the proper data because I can use it to open a new browser window with google.com showing the map. I have a published site that I haven't touched in months that had the maps suddenly stop working a few days ago. I've had to change the site to use an html component to get an updating google map as the google-map supplied via wix seems to have changed behavior.\n\nDid a recent upgrade to wix break/change something?\n\nThanks,\nAndy",
     "userEmail": "fiudoubo@tu.gov",
     "done": false,
-    "creationTime": 1545440195251
+    "creationTime": 1545440195251,
+    "labels": ["Api"]
   },
   {
     "title": "Google Maps Single Location Publish Issue",
@@ -716,14 +750,16 @@
     "content": "Hi,\n\nI am using a cryptocurrency API price tracker from: https://www.dunebook.com/create-a-cryptocurrency-price-update-website-using-wix-code/.\n\nThis current code allows me to pull the top 10 cryptocurrency prices from CoinMarketCap:\nexport function page1_viewportEnter(event, $w) {\ngetTopCoins().then(response => {\n$w('#coinList').text = \"Name: \" + response[0].name + \"t t\"\n+ \"Symbol: \" + response[0].symbol + \"t t\"\n+ \"Price (USD): \" + response[0].price_usd + \"n n\"\n+ \"Name: \" + response[1].name + \"t t\"\n+ \"Symbol: \" + response[1].symbol + \"t t\"\n+ \"Price (USD): \" + response[1].price_usd + \"n n\"\n+ \"Name: \" + response[2].name + \"t t\"\n+ \"Symbol: \" + response[2].symbol + \"t t\"\n+ \"Price (USD): \" + response[2].price_usd + \"n n\"\n+ \"Name: \" + response[3].name + \"t t\"\n+ \"Symbol: \" + response[3].symbol + \"t t\"\n+ \"Price (USD): \" + response[3].price_usd + \"n n\"\n+ \"Name: \" + response[4].name + \"t t\"\n+ \"Symbol: \" + response[4].symbol + \"t t\"\n+ \"Price (USD): \" + response[4].price_usd + \"n n\"\n+ \"Name: \" + response[5].name + \"t t\"\n+ \"Symbol: \" + response[5].symbol + \"t t\"\n+ \"Price (USD): \" + response[5].price_usd + \"n n\"\n+ \"Name: \" + response[6].name + \"t t\"\n+ \"Symbol: \" + response[6].symbol + \"t t\"\n+ \"Price (USD): \" + response[6].price_usd + \"n n\"\n+ \"Name: \" + response[7].name + \"t t\"\n+ \"Symbol: \" + response[7].symbol + \"t t\"\n+ \"Price (USD): \" + response[7].price_usd + \"n n\"\n+ \"Name: \" + response[8].name + \"t t\"\n+ \"Symbol: \" + response[8].symbol + \"t t\"\n+ \"Price (USD): \" + response[8].price_usd + \"n n\"\n+ \"Name: \" + response[9].name + \"t t\"\n+ \"Symbol: \" + response[9].symbol + \"t t\"\n+ \"Price (USD): \" + response[9].price_usd + \"n n\"\n});\n}\n\nApparently, the \"n n\" is supposed to create the new line, but this is the current output:\n\n \nThis is how it should look:\n\n \n\n\nDoes anyone have any idea on how I can separate the lines like shown in the above screenshot?\n\nThis is the link to my wix page:\nhttps://twistingknobs8.wixsite.com/mysite\n\nLet me know if I am missing any information and I am willing to jump on a audio/video call for a further deep dive!\n\nThanks,\nRobert",
     "userEmail": "zawcarol@vihuj.sk",
     "done": false,
-    "creationTime": 1545695709386
+    "creationTime": 1545695709386,
+    "labels": ["Api"]
   },
   {
     "title": "Has anyone else´s custom login suddenly stopped working?",
     "content": "Hi!\n\nSo I have used custom login and registration on my pages, which has been working fine, but suddenly today they give error 500.\n\nSo the code looks like this:\n\n \nimport wixUsers from 'wix-users';\nimport wixWindow from 'wix-window';\nimport wixLocation from 'wix-location';\n\n$w.onReady(function () {\n\n    $w(\"#loginButton\").onClick( (event) => {\n let email = $w(\"#loginEmail\").value;\n let password = $w(\"#loginPassword\").value;\n  wixUsers.login(email, password)\n  .then(()=>{\n    wixLocation.to(\"https://go-bros.wixsite.com/mysite-7\");\n      })\n        .catch((err) => {\n        console.log(err); \n        $w('#errortext').expand();\n        $w('#errorbox').expand();\n  } );\n  })  \n})\n\n\nexport function resetPassword_click(event) {\n      wixUsers.promptForgotPassword()\n  .then( ( ) => {\n    console.log(\"Password reset submitted\");\n  } )\n}\n\n\nLike I said, it has been working fine before, but now on it gives unknown error 500\non line 15, which is the line with console.log(err);\n\nIs anyone else getting the same issue?\n\nSincerely,\n\nNiko",
     "userEmail": "dodoseb@eg.pa",
     "done": false,
-    "creationTime": 1521078362547
+    "creationTime": 1521078362547,
+    "labels": ["Login"]
   },
   {
     "title": "Where are Next/Previous arrows? (page Not dynamic)",
@@ -737,7 +773,8 @@
     "content": "My apologies in advance for what is likely a basic question. Fetch and Json are new to be, as is the Corvid development environment. I am working to send JSON login information to another server via a fetch post. I have a short function (below) to do that. It calls another function that builds an array of login credentials it retrieves from a collection. I have verified that the login credentials are returned correction. No errors are reported in the debugger from this code.\n\nHow do I get at the response from the server? Nothing I have tried seems to work. Below is my current attempt.\n\nexport async function TestCode(event) {\n let loginarray = await getLoginCredentials();\n    console.log(loginarray); // I have verified login credtials coming back correctly.\n let url = [the url I am posting to];\n\n await fetch(url, {\n      method: 'post', data: JSON.stringify({\n      loginarray\n      })\n    .then((response) => {\n \n let txt = response.statusText;\n        console.log(\"Response : \" + txt); // nothing gets to the log from here no errors in debugging\n    }\n    )\n}\n\n  )\n}",
     "userEmail": "nuhdiwodu@rig.cn",
     "done": false,
-    "creationTime": 1522202817835
+    "creationTime": 1522202817835,
+    "labels": ["Corvid", "Login"]
   },
   {
     "title": "Need help pulling subscriber information",
@@ -758,28 +795,32 @@
     "content": "Hello!\n\nI am very new to Corvid and I'm not sure this is possible but I'm hoping it is and that I can do this.\n\nI'm working on creating a site for a mock clinic project I'm working on with sample patients. The patients will be the members of the site. On each member's page I want to be able to have it where they see their personalized data and trends, but I am able to enter the data on the back end for each member as needed; they see the results of that work.  \n\nI want for it to be where the member registers and this starts their page/account. But with each encounter, I enter any new stats and/or changes for them to view at their leisure.  Also need to keep a notes section for each visit.\n\nI have no idea where to begin or if that is even possible within the confines of this app for Wix.\n\nCan someon point me in the right direction or offer suggestions on where to begin? Thank you so much!",
     "userEmail": "mocezu@gozukef.ga",
     "done": false,
-    "creationTime": 1535399471704
+    "creationTime": 1535399471704,
+    "labels": ["Corvid"]
   },
   {
     "title": "Debugging scheduled jobs in corvid?",
     "content": "Is there a way to debug scheduled jobs in Corvid?\n\nI have created a jobs.config according to the guidelines. I have tested the function I am calling and it works as expected when run manually. However, I cannot seem to get the function to run based on the schedule.\n\nThings I have  tried:\n1. I have the \"Site Monitoring\" open over periods of time when the jobs should run. No logs for scheduled events.\n2. I have created a new collection called \"Scheduled Jobs\" which I write to at the beginning and the end of the scheduled job function I call. No updates to this table when called via schedule, but works when called manually.\n\nQuestions that may help me debug further:\n1. What permission level is a scheduled job given? (Although I do have all collection writes as \"SuppressAuth\", but the module itself is restricted to \"Admin\")\n2. Does jobs.config allow comments or do I need to delete all of those (i.e., is this pure json)? Sample file had some comments throughout and no errors in the wix editor with comments.\n\nAre there any other ways to see errors from the scheduled jobs in order to help me isolate the problem?\n\nExample entry in my jobs.config file:\n// -- 9 AM --     \n{  \n\"functionLocation\": \"updateRegistrations.updateLaRegistrations\",  \"description\": \"9am Get latest registrations\", \n\"executionConfig\": {  \n    \"time\": \"13:00\" // mandatory, “hh:mm” format\n }     \n},\n",
     "userEmail": "rigusne@doha.ir",
     "done": false,
-    "creationTime": 1541434113855
+    "creationTime": 1541434113855,
+    "labels": ["Corvid", "Guidelines", "Problem"]
   },
   {
     "title": "Corvid Example: Search a Database",
     "content": "Hi everyone. Derived from the Wix Corvid example 'Search a Database', I am attempting to add query functionality to the filter function. I need the search query to filter off columns: Title, City, State, Services. The code below will only resolve queries from Title. Where am I going wrong??\n\nimport wixData from \"wix-data\";\n\n$w.onReady(() => {\n\tloadContinents();\n});\n\nlet lastFilterTitle;\nlet lastFilterContinent;\nlet lastFilterCity;\nlet debounceTimer;\n\nexport function iTitle_keyPress(event, $w) {\n\tif (debounceTimer) {\n\t\tclearTimeout(debounceTimer);\n\t\tdebounceTimer = undefined;\n\t}\n\tdebounceTimer = setTimeout(() => {\n\t\tfilter($w('#iTitle').value, lastFilterContinent, lastFilterCity);  \n\t}, 500);\n}\n\nexport function iContinent_change(event, $w) {\n\tfilter(lastFilterTitle, $w('#iContinent').value);\n}\n\nfunction filter(title, continent, city) {\n\tif (lastFilterTitle !== title || lastFilterContinent !== continent || lastFilterCity !== city) {\n\t\tlet newFilter = wixData.filter();\n\t\tif (title)\n\t\t\tnewFilter = newFilter.contains('title', title);\n\t\tif (continent)\n\t\t\tnewFilter = newFilter.contains('state', continent);\n\t\tif (city)\n\t\t\tnewFilter = newFilter.contains('city', city);\n\t\t$w('#dataset1').setFilter(newFilter);\t\t\n\t\tlastFilterTitle = title; \n\t\tlastFilterContinent = continent;\n\t\tlastFilterCity = city;\n\t}\n}\n\nfunction loadContinents() {\n\twixData.query('States')\n\t  .find()\n\t  .then(res => {\n\t  \tlet options = [{\"value\": '', \"label\": 'All States'}];\n\t  \toptions.push(...res.items.map(continent => {\n\t  \t\treturn {\"value\": continent.title, \"label\": continent.title};\n\t  \t}));\n\t  \t$w('#iContinent').options = options;\n\t  });\n\n}\n\n",
     "userEmail": "tacoki@bauvo.pm",
     "done": false,
-    "creationTime": 1535577758559
+    "creationTime": 1535577758559,
+    "labels": ["Corvid"]
   },
   {
     "title": "How can I add price range to a product?",
     "content": "Hello all!\n\nI run an e-commerce site where I need to show the minimum and maximum price of the products I sell. For each size, a different price is applied.\n\nThe problem is my customers commonly think the price of the product is the one that is shown before hand, that is, the minimum price. This frustrates them. :(\n\nI'd like to show the minimum price and maximum price for the products that have different variant prices on my store.\n\nCan someone help me please?\n\nE.g.  \"$5.00 - $9.99\"  or  \"From $5.00\"",
     "userEmail": "tadut@guvnu.al",
     "done": false,
-    "creationTime": 1522343729791
+    "creationTime": 1522343729791,
+    "labels": ["Problem"]
   },
   {
     "title": "Custom 404 not working for dynamic page",
@@ -842,14 +883,16 @@
     "content": "The problem: I'm trying to get the image component placed inside a repeater to display the avatars images of each of the members it was loaded into the repeater array.\n\n \n$w(\"#myRepeter\").data = results.items; // This is an array resulting from the return of a query.\n$w(\"#myRepeter\").onItemReady(($item, itemData, index) => {                     \n\n$item(\"#imgMembro\").scr = itemData.picture;\n$item(\"#textName\").text = itemData.name;                 });\n\n}); \n\n\nNote that the content of $item(\"#imgMember\").scr is updated correctly with the content of itemData.picture\n\nWhy then are the images not updated on the repeater?",
     "userEmail": "pij@egme.ph",
     "done": false,
-    "creationTime": 1538627351470
+    "creationTime": 1538627351470,
+    "labels": ["Problem"]
   },
   {
     "title": "Member Login Bar / Login Lightbox not working ",
     "content": "Hi there, \n\nI have created a custom login lightbox so that when the members login bar (wix app) is clicked the lightbox appears, users input their email and password and click 'Login'. Once 'Login' is clicked they should be redirected to the Home page. \n\nThe issue is that everything works up until clicking the lightbox 'Login' button then nothing happens! No redirect and the user does not get logged in. The member login bar does not change to show the users profile picture and name and provide the drop down menu allowing them to log out. I am using registered information that I can see exists in the members database so I should be able to login with that information. \n\nI have copied the code I am using below - code was taken from a Code Queen Tutorial: https://www.youtube.com/watch?v=QbH8_eudjbE\n\nimport wixUsers from 'wix-users';\nimport wixLocation from 'wix-location';\nimport wixWindow from 'wix-window';\n\n$w.onReady(function () {\n $w(\"#forgotPassword\").onClick( (event) => {\n //wixWindow.lightbox.close()\n   wixUsers.promptForgotPassword()\n   .then( ( ) => {\n //\n   } )\n    .catch( (err) => {\n let errorMsg = err;  //\"The user closed the forgot password dialog\"\n    });\n });\n});\n\nexport function loginButton_click(event) {\n\n let email = $w(\"#email\").value;\n let password = $w(\"#password\").value;\n\n wixUsers.login(email, password)\n   .then( () => {\n     console.log(\"User is logged in\");\n     wixLocation.to(\"/home\");  //Change the URL ending to whatever page you want to send the user to after they log in.\n   } )\n    .catch( (err) => {\n     console.log(err);\n     $w(\"#errorMessage\").expand();  // You can delete this line if you are not going to add an error message.  Use a regular text element set to 'collapse on load' from the Properties Panel.\n   } ); \n}",
     "userEmail": "fosreflad@kitorga.fj",
     "done": false,
-    "creationTime": 1524898478006
+    "creationTime": 1524898478006,
+    "labels": ["Collapse", "Login", "Tutorial"]
   },
   {
     "title": "Does Wix have middleware?",
@@ -863,7 +906,8 @@
     "content": "What it says in the title. More info on Ads.txt available here.\n> https://www.quora.com/Do-I-need-to-add-Ads-txt-to-my-website-when-I-am-only-running-AdSense\n>https://support.google.com/adsense/answer/7532444?hl=en\n\nBut yeah, I have the txt file written out, my problem now is putting it on my website and redirecting the adsense crawler to dantetranslation.com/ads.txt (which currently does not exist, I don't know how to create it and redirect it to my txt) \n",
     "userEmail": "kotufuf@wafa.mv",
     "done": false,
-    "creationTime": 1528689573253
+    "creationTime": 1528689573253,
+    "labels": ["Problem"]
   },
   {
     "title": "help me",
@@ -898,14 +942,16 @@
     "content": "I'm asking my clients to upload 3 media files. And they can change/modify it whenever they want. So its a form with 3 Image/Video input fields. And I want them to upload as many times as they want but the form will only display the latest set of images/videos.\n\nEvery time they update, image1, image2 and image3.... it gets updated as a new row in the database. Problem is, how do I display latest set of image1, image2 and image3? Especially when clients update only 1 or 2 images at a time and not the entire row.\n\nExample:\nOn Day 1, client uploads image1, image 2 and image3. Form should display those 3 media files.\nOn Day2, client decides to update only image3. Database creates a new row where image1 and image2 are NULL/empty. Image3 has the new image. How can my form display image1 and image2 from Day1 and image3 from Day2?\nI've tried using sort and filter in dataset element but that filters the entire row. And not for individual media files.\n\n",
     "userEmail": "jopzu@mejoto.mr",
     "done": false,
-    "creationTime": 1529330962390
+    "creationTime": 1529330962390,
+    "labels": ["Problem"]
   },
   {
     "title": "Is wix capable of creating a web socket?",
     "content": " Hi guys, may I ask about is there any way to make changes to an already open web page (new tab or window), from another page (different tab/window)?\nI am doing a prototype for restaurant pos system, which I want to show customer view and cashier view at the same time on different screen (dual screen), and the changes in cashier view will affect customer view instantly. \nOr is there other way to achieve my objective? \n\nSome people are telling me about web socket, so I try to search for web socket in wix, but I did not find what I want.",
     "userEmail": "oj@osu.is",
     "done": false,
-    "creationTime": 1522220157320
+    "creationTime": 1522220157320,
+    "labels": ["Problem"]
   },
   {
     "title": "text-align in html for text",
@@ -947,21 +993,24 @@
     "content": "I've followed an example point for point to add a collapsable menu on my website - everything works except that it won't collapse - any ideas where i have gone wrong?\n\n \n \n\n\n\n",
     "userEmail": "bozta@di.id",
     "done": false,
-    "creationTime": 1519178127140
+    "creationTime": 1519178127140,
+    "labels": ["Collapse"]
   },
   {
     "title": "Shortcut to move element in front of another element without attaching to the back element ?",
     "content": "is there a keyboard shortcut to avoid attaching element to the back element ? \n\nfor example: move a text in front of a slideshow without attaching the text inside slideshow's slide so that the text will not move as slides move\n\ni've tried to hold ctrl while move, tried shift, tried alt\n\ncurrently i'm using keyboard arrows to move the front element to avoid attached to the back element, and sometimes using align tool in toolbar\n\nsorry for often posting questions, this because i l❤ve working with wix to build client's websites, and for someone who think this not a corvid related, i've enabled dev mode while doing this  L🤣L ",
     "userEmail": "teki@em.jm",
     "done": false,
-    "creationTime": 1520477186513
+    "creationTime": 1520477186513,
+    "labels": ["Corvid"]
   },
   {
     "title": "I can't make Toggle Button \"Show More/Show Less\" \n",
     "content": "hello everyone\nI can't make Toggle Button \"Show More/Show Less\" \n\nhttps://support.wix.com/en/article/creating-an-expandable-text-box-with-a-show-more-link-using-wix-code#working-with-dynamic-text\n\nI used code\nlet fullText;\nlet shortText;\n// For full API documentation, including code examples, visit https://wix.to/94BuAAs\n\n$w.onReady(function () {\n  const shortTextLength = 40;\n  $w(\"#dynamicDataset\").onReady(function () {\n    fullText = $w('#dynamicDataset').getCurrentItem().description;\n    // if no text to display, collapse the text element and the button\n    if (!fullText) {\n      $w('#text5').collapse();\n      $w('#button13').collapse();\n    } else {\n    // if the text has fewer or the same number of characters as shortTextLength characters, display it as is and collapse the \"Show More\" button\n      if (fullText.length <= shortTextLength) {\n        $w('#text5').text = fullText;\n        $w('#button13').collapse();\n      } else {\n      // create the shortened version of the text and display it in the text element\n        shortText = fullText.substr(0, shortTextLength) + \"...\";\n        $w('#text5').text = shortText;\n      }\n    }\n  });\n\n});\n",
     "userEmail": "atuho@hat.sz",
     "done": false,
-    "creationTime": 1536389623692
+    "creationTime": 1536389623692,
+    "labels": ["Api", "Collapse"]
   },
   {
     "title": "after/beforeInsert hook not available ",
@@ -989,7 +1038,8 @@
     "content": "Hello everyone.\nIf some one can help me please, I'm really frustrated with this problem, I tried all bit and pieces but nothing work out, if any one of you can help me will be deeply appreciated.\n\nThis is regarding the dynamic page link not working in live environment.\nId values in sandbox /Live collection mode is not matching with the id values showing in the URL of live environment and hence the result is \"404 - Page not found\"\nI have sync with Live data, Publish the Live date in collection databases , but all this doesn't resolve my issue.\nI have used the below code to direct to Dyanamic page in page\n \nwixLocation.to(`/members-signup/update/${wixUsers.currentUser.id}`);\n   } )\n\nMany Thanks\nSushant Malviya\n\n\n\n\n\n\n",
     "userEmail": "za@duppe.et",
     "done": false,
-    "creationTime": 1535940371235
+    "creationTime": 1535940371235,
+    "labels": ["Problem"]
   },
   {
     "title": "Javascript is displayed on wrong place",
@@ -1003,7 +1053,8 @@
     "content": "I have followed the wix code forum guide to employ \"expandable text\" boxes on my site.  Although the code works perfectly with one expandable text box - it seems to fail when another is added to the page.\n\nI've added the code below.  Basically, box #1 has the correct short-text (first 30 characters pulled from it's corresponding largetext box).  However, when I click the \"show more\" button, it then populates it with the short text from button 2, and then the long/full text from button 2.\n\nIf I was to add a third button, this would happen with both the first and second button... (they would look correct upon the page loading, but once the button is clicked - would populate from the third text box).\n\nAny ideas on how this can be resolved?  Much appreciated!\n\n\nlet fullText; // variable to hold the full text\nlet shortText; // variable to hold the short version of the text\n\n$w.onReady(function () {\n // how many characters to include in the shortened version\n const shortTextLength = 30;\n // read the full text and store it in the fullText variable\n    fullText = $w(\"#text17\").text;\n // grab the number of characters defined in shortTextLength and store them in the shortText variable\n    shortText = fullText.substr(0, shortTextLength) + \"...\";\n // set the contents of the text element to be the short text\n    $w(\"#text17\").text = shortText;\n\n});\n\nexport function button6_click(event, $w) {\n // check the contents of the text element \n if ($w(\"#text17\").text === shortText) {\n // if currently displaying short text, display the full text\n        $w(\"#text17\").text = fullText;\n        $w(\"#button6\").label = \"Show Less\";\n    } else {\n // if currently displaying full text, display the short text\n        $w(\"#text17\").text = shortText;\n        $w(\"#button6\").label = \"Show More\";\n    }\n}\n\n$w.onReady(function () {\n // how many characters to include in the shortened version\n const shortTextLength = 40;\n // read the full text and store it in the fullText variable\n    fullText = $w(\"#text22\").text;\n // grab the number of characters defined in shortTextLength and store them in the shortText variable\n    shortText = fullText.substr(0, shortTextLength) + \"...\";\n // set the contents of the text element to be the short text\n    $w(\"#text22\").text = shortText;\n\n});\n\nexport function button7_click(event, $w) {\n if ($w(\"#text22\").text === shortText) {\n // if currently displaying short text, display the full text\n        $w(\"#text22\").text = fullText;\n        $w(\"#button7\").label = \"Show less\";\n    } else {\n // if currently displaying full text, display the short text\n        $w(\"#text22\").text = shortText;\n        $w(\"#button7\").label = \"Show more\";\n    }\n}\n\nexport function button8_click(event, $w) {\n if ($w(\"#text24\").text === shortText) {\n // if currently displaying short text, display the full text\n        $w(\"#text24\").text = fullText;\n        $w(\"#button8\").label = \"Show less\";\n    } else {\n // if currently displaying full text, display the short text\n        $w(\"#text24\").text = shortText;\n        $w(\"#button8\").label = \"Show more\";\n    }\n}",
     "userEmail": "kiaza@tadensa.sa",
     "done": false,
-    "creationTime": 1516330468464
+    "creationTime": 1516330468464,
+    "labels": ["Expand"]
   },
   {
     "title": "Little help with js code",
@@ -1031,7 +1082,8 @@
     "content": "Hi everyone,\n\nIm having issues with Wix Corvid and the specific issue is that my sign up and login buttons don't seem to be working anymore. My code seems okay from what i remember but now they dont work. The buttons just seem to be dead. Any ideas? ",
     "userEmail": "seffuz@zanbo.su",
     "done": false,
-    "creationTime": 1538064081982
+    "creationTime": 1538064081982,
+    "labels": ["Corvid", "Login"]
   },
   {
     "title": "Custom member signup",
@@ -1066,7 +1118,8 @@
     "content": "Hello wix Forum! I was trying to use the .setPageSize() function, to change the number of items to display of my dataset. I read in the documentation that this function can modify this value.\nAfter several failing attempts I decided to try the code in a clean page, I copied the example code in the APi documentation and added a .getPageSize() to see if the change was happening. here is the code:\n\n$w.onReady(function () {\n //TODO: write your page related code here...\n  $w(\"#dataset1\").setPageSize(6)\n  .then( () => {\n    console.log(\"Page size set.\");\n  } )\n  .catch( (err) => {\n let errMsg = err.message;\n let errCode = err.code;\n  } );\n  let val = $w('#dataset1').getPageSize()\n  console.log(val)\n});\nI run it various times and it didn't worked. \nI read in the documentation that: \n\"Calling setPageSize() on a read-only dataset causes an error.\" \nso I checked with my dataset and it was set to \"read-only\" by default but it doesn't give an error, but I noticed that it does gives an error when you set the dataset to \"write-only\". I think that maybe they put \"read-only\" instead of \"write only\" by mistake in the documentation.\nbut the real problem is why .setPageSize() doesn't work, is it a bug? am I doing something wrong? if so please explain to me the right way to use this function because I really need it for my page.\nbelow is a video showing what I did.\nthanks in advance.\n\n \n",
     "userEmail": "lonidgi@robzap.ye",
     "done": false,
-    "creationTime": 1527100119585
+    "creationTime": 1527100119585,
+    "labels": ["Api", "Problem"]
   },
   {
     "title": "WixDataQuery - FUNCTIONS - ne()",
@@ -1080,28 +1133,32 @@
     "content": "Dear Wix community,\n\nI've used the following tutorial (https://support.wix.com/en/article/how-to-create-a-custom-registration-form) to create a customized Sign Up form for my customers after cart checkout. The issue is that this Sign Up creates a member that is not connected with the customer contact. And the customer can't see his orders nor his personal information after login.\n\nThanks for your help.\n\nNerder",
     "userEmail": "iwoma@ectiv.ao",
     "done": false,
-    "creationTime": 1523071858262
+    "creationTime": 1523071858262,
+    "labels": ["Tutorial"]
   },
   {
     "title": "Custom Payment for Wix pay API (Pay Flow) - Need for Client by tonight.",
     "content": "Hi All,\nI have been trying this code on this page for 2 days now:\nhttps://www.wix.com/corvid/forum/community-discussion/custom-payment-amounts-with-pay-api\n\nI have been modifying this example along with it:\nhttps://support.wix.com/en/article/corvid-tutorial-using-the-corvid-pay-api-to-collect-payments-for-a-single-product\n\nhttps://www.youtube.com/watch?v=YJuYl47tjxs\n\n\nIt doesn't work when I modify the example. I am using Square as my payment portal. My client wants this by tomorrow morning EST. I even tried modifying the code to have a construct field. Here is my current code:\nPAGE CODE\n\nimport wixPay from 'wix-pay';\nimport {createMyPayment} from 'backend/BE_PayAPI';\n\nexport function button1_click(event) {\n    createMyPayment($w('#input1').value,$w('#input2').value)\n const invoicenumber = `${$w(\"#input1\").value}`;\n const customamount = `${$w(\"#input2\").value}`\n         .then( (payment) => {\n      wixPay.startPayment(payment.id);\n    } );\n}\n\nBACKEND CODE\nimport wixPay from 'wix-pay-backend';\nexport function createMyPayment(invoicenumber,customamount){\n let cPaymentString = { amount: customamount, \n        items: \n        [{name: invoicenumber, price: customamount}] };   \n return wixPay.createPayment(cPaymentString);\n}\n\n\n\nI am using an example site right now so details might not match branding.\nMy URL: https://andrew0657.wixsite.com/mysite-1\nAny insight tonight would be beyond helpful!",
     "userEmail": "zesoz@ubocej.hn",
     "done": false,
-    "creationTime": 1522719394911
+    "creationTime": 1522719394911,
+    "labels": ["Corvid", "Api", "Login"]
   },
   {
     "title": "Conditional User Input Drop Down not showing all data from dataset",
     "content": "I am currently building a form and one of the user input drop down is not showing all the data from the dataset (ie regions. only 5 out of 10 are showing). I presumed that maybe there were some issues with the CSV file used to populate the dataset, but after making sure that all is as it should be it is still not working as it should (i tried using a CSV file, MS DOS CSV file, a MAC CSV file but the same problem occurs). Anyone has any idea what could be the issue here?\n\nBelow is the code for the page:\n\nimport wixData from 'wix-data';\n\n$w.onReady(function () {\n    populateRegion();\n    populateCommune();\n\n});\n\nfunction populateRegion(){\n\nwixData.query(\"Region2\")\n.find()\n.then(results => { \nvar uniqueList = createUniqueList(results.items);\n$w(\"#iptRegion\").options = buildOptions(uniqueList);\n})\n\nfunction createUniqueList(items){\nvar titlesOnly = items.map(item => item.region);\ntitlesOnly.sort();\nreturn[...new Set(titlesOnly)];\n}\n\nfunction buildOptions (uniqueList){\nvar uniqueListFinal = uniqueList.map(curr => { return {label :curr, value:curr}; });\nreturn uniqueListFinal;\n\n}\n}\nfunction populateCommune(){\n\nwixData.query(\"Region2\")\n.eq('region',$w(\"#iptRegion\").value)\n.find()\n.then(results => { \nvar uniqueList = createUniqueList(results.items);\n$w(\"#IptCommune\").options = buildOptions(uniqueList);\n})\n\nfunction createUniqueList(items){\nvar titlesOnly = items.map(item => item.commune);\ntitlesOnly.sort();\nreturn[...new Set(titlesOnly)];\n}\n\nfunction buildOptions (uniqueList){\nvar uniqueListFinal = uniqueList.map(curr => { return {label :curr, value:curr}; });\nreturn uniqueListFinal;\n\n}\n}\n\n\nexport function iptRegion_change(event) {\n    populateCommune(); \n    $w(\"#IptCommune\").enable();\n}\n\nHere is what the dropdown shows.\n\n \n\nHere's the CSV file used to populate the dataset\n\n \n",
     "userEmail": "co@toiru.cx",
     "done": false,
-    "creationTime": 1539392190605
+    "creationTime": 1539392190605,
+    "labels": ["Problem"]
   },
   {
     "title": "Member’s Login Session Token Help – Better Wix Coding From Lessons Learned",
     "content": "  \nThis is a simple solution with a longer explanation … \nI thought I should post this to help those whom are using login session tokens on their sites (for their member’s area [aka site’s customers] logins). Most coders are familiar with uncovering nuances and revelations after multiple tries and/or reads on docs. That isn’t an always case, but it does happen. \n\nI recently encountered a situation that is mentioned in Wix docs but not apparent in whole; which is regarding session tokens to login a user. Basically, for a session token type login, there is frontend code that completes the login and there is backend code that initially gets/generates a session token. This type of usage is needed for remote and/or 3rd party type logins. \n\nThe nuance I discovered is that in the second step, which is to complete the login from the frontend, you need to utilize a frontend function (‘onLogin()’) from the ‘wix-users’ library.  This is because the ‘wix-users’ library should be used once the page is loaded, which can be utilized through the ‘onReady()’ event-handler like ‘$w.onReady()’. This is clearly announced in the Wix docs, while the part that a login success (completion) technically is its own promise, and thereby needs to be called is not so apparent. The login from the frontend Wix is a void type promise. Moreover that, those who are familiar with browser usage would know that there is information being exchanged in order to have a completed login that will maintain a session’s persistence throughout the member’s usage. Therefore, we need to utilize the ‘onLogin()’ in order to provide seamless usage for a member we are logging in. This is helpful if we are handling code that needs the user logged and/or want to move to other pages that are member-area restricted. \n\nAs mentioned, this is easy to handle, as you can see in the code below. I have provided the two optional ways to do this – via Email & Password -OR- Email only.\n\n-------------------- THIS IS BACKEND CODE (start) --------------------\n// Published 2019-09-23\n/// Make sure to check for new updates in Wix docs\n/// API-Reference: https://www.wix.com/corvid/reference \n/// Help-Center: https://support.wix.com/en/article/corvid-security-considerations (search from top-right bar)\n\n/// Place this file in \"backend\", and name this file: 'login.jsw' -- otherwise use any unique name, but remember to change it in the front-end (page's) code.\n/// Using \".jsw\" identifies this as a Web-Module (node_modules), which allows to bring in other (outside) code repositories and services - e.g. Twilio, etc.\n\n\nimport wixUsers from 'wix-users-backend';\n\n/*********************************\n * backend-side login code *\n *********************************/\n\n/// Option-1 with both Email & Password.\n/// This Exported Function will GET a session token from both an email & password input. \nexport function getLoginToken(email, password) {\n return wixUsers.login(email, password)\n        .then((sessionToken) => {\n return { \"sessionToken\": sessionToken, \"approved\": true };\n        });\n} // End of Exported-Function 'getLoginToken'\n\n\n/// Option-2 with Email Only.\n/// This Exported Function will GENERATE a session token with only the email input. \n/// This is not my preferred way, but may be the only (wix avail) option for things like 3rd party auths.\nexport function generateLoginToken(email) {\n return wixUsers.generateSessionToken(email)\n        .then((sessionToken) => {\n return { \"sessionToken\": sessionToken, \"approved\": true };\n        });\n} // End of Exported-Function 'generateLoginToken'\n-------------------- THIS IS BACKEND CODE (end) --------------------\n\n-------------------- THIS IS FRONTEND CODE (start) --------------------\n\n// Published 2019-09-23\n/// Make sure to check for new updates in Wix docs\n/// API-Reference: https://www.wix.com/corvid/reference \n/// Help-Center: https://support.wix.com/en/article/corvid-security-considerations (search from top-right bar)\n\n/// Place this on the login page (not the site but the page itself)\n\n\nimport wixWindow from 'wix-window';\nimport wixUsers from 'wix-users';\nimport wixLocation from 'wix-location';\nimport { generateLoginToken, getLoginToken } from 'backend/login.jsw';\n\n/*********************************\n * client-side login code *\n *********************************/\n\n /// This Gets Called upon the page's Log-in (when) being ready.\n /// This is IMPORTANT if you are using Member Area restricted pages and want to move to that page upon a login.\n wixUsers.onLogin( (user) => {\n let userId = user.id;           // EX) \"r5cme-6fem-485j-djre-4844c49\"\n let isLoggedIn = user.loggedIn; // should be 'true' here.\n let userRole = user.role;       // EX) \"Member\"\n console.log(`From ON-LOGIN. Here is User's Info: ID=='${userId}' && ROLE=='${userRole}'`);\n console.log(`From ON-LOGIN, Is User Logged-In? '${isLoggedIn}'`);\n wixLocation.to(\"/myWelcomePage\");  //Change the URL ending to whatever page you want to send the user to after they log in.\n console.log(\"From ON-LOGIN - Moving to New Page That is Member Restricted\");\n}); // End of Wix's Log-In Ready Function.\n\n\n/// This Gets Called upon the page loading to be ready\n$w.onReady(function() {\n\n/// Option-1 with both Email & Password.\n/// Showing 2 button examples although in reality should have 1 button for 1 login.\n/// This is tied to the button added in Wix-Web's UI, with the tag renamed to 'button01' -- Name it whatever (uniquely) you'd like.\n/// Personally I don't prefer this flow, due to security reasons, although based on your needs\n/// it maybe the only (Wix) available solution - e.g. 3rd party Auth.\n $w(\"#button01\").onClick((event) => {\n // Get current values\n let useEmail = String($w(\"#email\").value);\n let usePassword = String($w(\"#password\").value);\n // call backend function\n getLoginToken(useEmail, usePassword)\n    .then((loginResult) => {\n // if approved log the user in with the session token\n if (loginResult.approved) {\n wixUsers.applySessionToken(loginResult.sessionToken);\n console.log(\"Get-Token-User-Is-APPROVED.\");\n let isLoggedIn = wixUsers.currentUser.loggedIn // will be 'false' here.\n console.log(`From Get-Token, Is User Logged-In? '${isLoggedIn}'`);\n        }\n // if not approved log a message\n else {\n console.log(\"Get-Token-User-NOT-Approved.\");\n        }\n    });\n    }) // End of \"button01\" Click Action\n\n /// Option-2 with Email Only.\n /// Showing 2 button examples although in reality should have 1 button for 1 login.\n /// This is tied to the button added in Wix-Web's UI, with the tag renamed to 'button02' -- Name it whatever (uniquely) you'd like.\n $w(\"#button02\").onClick((event) => {\n // Get current value\n let useEmail = String($w(\"#email\").value);\n // call backend function\n generateLoginToken(useEmail)\n            .then((loginResult) => {\n // if approved log the user in with the session token\n if (loginResult.approved) {\n wixUsers.applySessionToken(loginResult.sessionToken);\n console.log(\"Generate-Token-User-Is-APPROVED.\");\n let isLoggedIn = wixUsers.currentUser.loggedIn // will be 'false' here.\n console.log(`From Generate-Token, Is User Logged-In? '${isLoggedIn}'`);\n                }\n // if not approved log a message\n else {\n console.log(\"Generate-Token-User-NOT-Approved.\");\n                }\n            });\n    }) // End of \"button02\" Click Action\n \n}) // End of Wix's Page Ready Function\n\n-------------------- THIS IS FRONTEND CODE (end) --------------------\nI hope this is helpful to someone ...\n",
     "userEmail": "tu@gavitoj.ki",
     "done": false,
-    "creationTime": 1522156394159
+    "creationTime": 1522156394159,
+    "labels": ["Corvid", "Login"]
   },
   {
     "title": "Online store",
@@ -1143,21 +1200,24 @@
     "content": "I'm creating ~15 product detail pages using dynamic page feature in WiX. They have the same template where product title and description are fetched from the dB that I created.\nThe problem is a few of these products have videos which I can upload on YouTube/WiX. I can add video URLs to the dB against respective products. On the frontend, I want these videos to appear for products which have the video URL in the dB. For others, they should not appear.\nI was thinking if I can create a strip which is conditional which is displayed only if a value if found in the database.",
     "userEmail": "ju@ju.sc",
     "done": false,
-    "creationTime": 1531388034703
+    "creationTime": 1531388034703,
+    "labels": ["Problem"]
   },
   {
     "title": "Creating a Show-More button for a text",
     "content": "Hello everyone, I am working on my website homepage descriptions (https://www.giacomoguaragna.comand) but I am having some troubles with the code of a show more text. What I want to have is a text which can be expanded if you click on a button below (or simply by hover the mouse on it).\nI followed the tutorial in this link https://support.wix.com/en/article/wix-code-tutorial-creating-a-show-more-link#working-with-dynamic-text but I don't understand why it is not working...\nHere some images and the code I am using:\n\n \n\n \nThe problems are 2: when I preview my page, the text \"I would like to start my story by...\" is completely shown (even if only the first 40 characters should be visible) and when I click on the \"Show more\" button nothing happens. In the editor view, the platform doesn't signal me any errors, whereas when I preview it, it shows me 2 errors...I also tried to publish it but nothing changes as well. \n\n \n\nHere the code (copied from the tutorial):\n\nlet fullText; // variable to hold the full text\nlet shortText; // variable to hold the short version of the text\n\n// how many characters to include in the shortened version\nconst shortTextLength = 40;\n// read the full text and store it in the fullText variable\nfullText = $w(\"#text70\").text;\n// grab the number of characters defined in shortTextLength and store them in the shortText variable\nshortText = fullText.substr(0, shortTextLength) + \"...\";\n// set the contents of the text element to be the short text\n$w(\"#text70\").text = shortText;\n\nexport function button1_click(event) {\n //Add your code for this event here: \n$w(\"#text70\").text = fullText;\n// collapse the button\n$w(\"#button1\").collapse();\n}\n\n \nI am very new to coding and this is not the first time I struggle with WIX. Of course, I am also open to other ways to reach my objective here.\nIf anyone could help me, I would be very grateful!\n\nThanks,\nGiacomo\n",
     "userEmail": "ba@rube.pr",
     "done": false,
-    "creationTime": 1544922672103
+    "creationTime": 1544922672103,
+    "labels": ["Collapse", "Expand", "Problem"]
   },
   {
     "title": "Help! login and signup just stopped working",
     "content": "Can anyone please help me out here.\n\nMy website was working absolutely fine up until a few days ago.\n\nNow people can not login , click forgot password or submit registration request.\n\nHere is my code for the lightbox, I have checked all of the object names to ensure they match.\n\nIt appears that wherever Wix-Users is involved it just has stopped working.\n\nIs anyone else having this issue? as im at the end of my tether with this. i could revert to the Wix standard login however i dont feel it is fit for a customer facing website.\n\nI contacted Wix support who claim i need to include the members data set in my page and link each individual item to the data set, however i believe this to be incorrect as there is no forgot password in the data set, nor is there a password field to link.\n\nAlso if you do try to link an email - you cannot type into the box\n\n\nI have tried reverting to my last release over over 3 weeks ago, still didnt work. I have copied my exisitng light boxes as this seemed to fix a bug that was present last month, this also didnt work\n\n\n \n\nimport wixUsers from 'wix-users';\nimport wixLocation from 'wix-location';\nimport wixWindow from 'wix-window';\n\n$w.onReady(function (){\n    $w(\"#forgottenPassword\").onClick(\n        (event) => {\n //WixWindow.lightbox.close//wixWindow.lightbox.close()\n\n            wixUsers.promptForgotPassword()\n            .then( ( ) =>{\n //\n            })\n            .catch((err) => {\n let errorMsg = err; //\"The user closed the forgot password dialog\"\n            });\n        });\n    });\n \n$w.onReady(function(){  \n    $w('#loginNow').onClick(function (){    \n let email = $w('#loginEmail').value;    \n let password = $w('#loginPassword').value;  \n        wixUsers.login(email,password)  \n        .then(()=>{\n            wixLocation.to('/HOME');   \n            })\n            .catch((err) => {\n            console.log(err);\n\n        $w(\"#passwordWrong\").expand();\n            });\n        })\n    })\n\n\n\n \n\nHere is the code for my registration \n\n \n\nimport wixUsers from 'wix-users';\nimport wixLocation from 'wix-location';\n \n$w.onReady(function(){  \n    $w('#registerNow').onClick(function (){  \nlet email = $w('#email').value;\nlet companyName = $w('#companyName').value;  // the user's company name\nlet password = $w('#password').value;  // the user's password\nlet firstName = $w('#firstName').value;  // the user's first name\nlet lastName = $w('#lastName').value; // the user's last name\n\nwixUsers.register(email, password, {\n    contactInfo: {\n \"firstName\": firstName,\n \"lastName\": lastName,\n \"companyName\": companyName,\n    }\n  })\n  .then( (result) => {\n let status = result.status;\n let approvalToken = result.approvalToken; // \"Pending\"\n let user = result.user;\n      wixLocation.to('/exit'); \n            })\n        })\n    })\n\n\n\n",
     "userEmail": "hos@riwo.sj",
     "done": false,
-    "creationTime": 1535432699259
+    "creationTime": 1535432699259,
+    "labels": ["Expand", "Login", "Tutorial"]
   },
   {
     "title": "Can't seem to pull url or mailto:",
@@ -1178,7 +1238,8 @@
     "content": "Estou utilizando a página dinâmica em um site e, apesar do meu banco de dados não conter nenhum dado repetido, ao publicar e visualizar meu site, o conteúdo se repete. \nAlguma ideia de como resolver esse problema?\n\nI'm using the dynamic pages on my website and although the content on the database is not duplicated, once i save the page and visualize it, the list of content repeats itself twice. Does anyone know what could be causing this problem?",
     "userEmail": "uwu@coiko.ph",
     "done": false,
-    "creationTime": 1542636109622
+    "creationTime": 1542636109622,
+    "labels": ["Problem"]
   },
   {
     "title": "Please help  Forms and Database question",
@@ -1192,14 +1253,16 @@
     "content": "Hello! I know this has probably been asked a million times, but I haven't been able to find a specific answer. I'm trying to change the text color inside of a button using MouseIn and MouseOut because the \"customize design\" options do not seem to be working. I need button options for my design because I'm programing custom hover features connected to them. In wanting to change the text color on hover, am I trying to do something that can only be done using html? If so, how can I switch over to change the text color inside of the button. Thank you in advance for any  help on this! Here's what I'm working with: \n\nexport function RiskHover_mouseIn(event) {\n //Add your code for this event here: \n    $w('#riskstrip').show(\"FadeIn\");\n    $w('#coverstrip').show();\n    $w(\"#riskbutton\").style.color=\"rgb(255,69,0)\"\n}\n\nexport function RiskHover_mouseOut(event) {\n //Add your code for this event here: \n    $w('#riskstrip').hide();\n    $w('#riskbutton').style.color = \"rgb(255,255,255)\";",
     "userEmail": "rafwal@piki.gg",
     "done": false,
-    "creationTime": 1523237070380
+    "creationTime": 1523237070380,
+    "labels": ["Api"]
   },
   {
     "title": "Wix code SDK Warning: The text parameter cannot be set to null or undefined",
     "content": "Hi everybody!\nFirst of all, thank you so much for taking the time to read this!\n \n\nWhat I am trying to do: code my lightbox so that the users can check what are our delivery prices and times in their country. There is one collection called \"Lieferkosten\", that combines this information in 4 columns/fields:  Country (land), Region (region), Delivery fee (versandkosten) and Delivery time (versanddauer). The names in brackets are the respective fieldkeys.\nUnder the two dropdowns where users can select their region and country, there are 3 textboxes that should display: #text55 (selected country name), #text56 (the delivery fee that corresponds to the selected country), #text57 (the delivery time that corresponds to the selected country)\n\nWhat works so far: The client clicks on the #dropdown2 to select what region he comes from. Upon user input (selection of a region) an On Change function causes the #dropdown1 to be activated and display all the countries that belong to this selected region. The country name selected on #dropdown1 is shown on textbox #text55 (however not thanks to code but to the API connection)\n\nProblem:\n#text56 and #text57 either display nothing or remain unchanged.\n\nI have tried several solutions, checked the fieldkeys many times and they do correspond to what is in the collection. On my latest attempt (which is the code below, where I only tested it on #text56) I get the error message:  \"Wix code SDK Warning: The text parameter of \"text56\" that is passed to the text method cannot be set to null or undefined.\" and on the developer tool I find: \"TypeError: Cannot read property 'versandkosten' of undefined\"\n\n...\nexport function dropdown2_change(event) {\n    uniqueDropDown2();\n$w(\"#dropdown1\").enable();\n    NewQuery();\n$w('#text56').text = NewQuery()\n\n}\nfunction NewQuery() {\n let myTextQuery = $w('#dropdown2').value\n   wixData.query(\"Lieferkosten\").eq(\"versandkosten\", myTextQuery) // the first element here is the field key, not the field name.\n.find()\n.then((results) => {\n if(results.items.length > 0) {\n let item = results.items[0];\n let secondText = item.versandkosten; //the field key of the second column\n let thirdText = item.versanddauer; //the field key of the third column\n    }else{\n //put here the code you want to execute in case of no match.\n    }\n})}\n\n \n\n \n\nI´m very new to corvid and don´t know that much about coding so would really appreciate any corrections or tips even if they are an entirely new suggestion of code :)",
     "userEmail": "lugcuge@ojta.eh",
     "done": false,
-    "creationTime": 1544677970688
+    "creationTime": 1544677970688,
+    "labels": ["Corvid", "Api", "Problem"]
   },
   {
     "title": "repeater with text box with link",
@@ -1227,7 +1290,8 @@
     "content": "This text is copy of  Guillaume Noel but I think there is a lot of us who need it:\n\nSome of my buttons have a lot of text (8-10 words) and it's fine on the computer side because I can just make a longer button but when I get to the phone version, I cannot fit all the text of my buttons on 1 line unless I make it ridiculously small. \nHaving the possibility to make a button with multiple lines of text would fix my problem and also bring the possibility of square or circle buttons with 2 words one of top of each other like \"click here\" or \"buy now\" as an example.\n\nThanks for any advice :)\n ",
     "userEmail": "gellawid@odese.pk",
     "done": false,
-    "creationTime": 1522879308573
+    "creationTime": 1522879308573,
+    "labels": ["Problem"]
   },
   {
     "title": "hi everyone, tell me how to add a FILE SHARE to a separate page",
@@ -1255,7 +1319,8 @@
     "content": "I understand I cannot put php in corvid code. I am guessing I may be able to put some php code in this unusual spot. Can someone verify this is true before I waste a bunch if time trying this?\n\nI need to talk to a 3rd party back end and have some rock-solid php code that is already written and tested.\n\n \n\nThis seems like an odd place (accessed via Settings >> Analytics. But it seems I can put non-native corvid code in a custom spot if I go that route. Anyone know?\n",
     "userEmail": "rusha@eguoci.eg",
     "done": false,
-    "creationTime": 1524595561505
+    "creationTime": 1524595561505,
+    "labels": ["Corvid"]
   },
   {
     "title": "Collection import replace",
@@ -1269,14 +1334,16 @@
     "content": "\nHi everyone,\n\nI was wondering if anyone could help me with this?\n\nI have followed the tutorial to set up a collapsable section of text with the read more read less functionality. The text is now not showing on my published site at all. I can't see any issues and wondered if anyone could have a quick look over it for me? The code I used from the Corvid tutorial is below and my site is https://www.businessnetwork.healthygirlhq.com\n\nThanks so much in advance to anyone that can help \n\nRacheal \n\n$w.onReady(function () {\nlet fullText; // variable to hold the full text\nlet shortText; // variable to hold the short version of the text\n// how many characters to include in the shortened version\nconst shortTextLength = 40;\n// read the full text and store it in the fullText variable\nfullText = $w(\"#text5\").text;\n// grab the number of characters defined in shortTextLength and store them in the shortText variable\nshortText = fullText.substr(0, shortTextLength) + \"...\";\n// set the contents of the text element to be the short text\n$w(\"#text5\").text = shortText;\n});\nexport function button5_click(event) {\n// check the contents of the text element \nif ($w(\"#text5\").text === shortText) {\n// if currently displaying short text, display the full text\n$w(\"#text5\").text = fullText;\n$w(\"#button5\").label = \"Show less\"; \n} else {\n// if currently displaying full text, display the short text\n$w(\"#text5\").text = shortText;\n$w(\"#button5\").label = \"Show more\";\n}\n}",
     "userEmail": "cadge@un.lb",
     "done": false,
-    "creationTime": 1526491512242
+    "creationTime": 1526491512242,
+    "labels": ["Corvid", "Tutorial"]
   },
   {
     "title": "async function with a foreach loop",
     "content": " Hi guys! \n \n I am getting better but still running into some dead ends with my coding :) \nThis is what I am trying to do:\nI have crated a time-table matrix as collection: Gruppenkalender (see pic1). \n\n \n\nThe idea is that whenever I open the time-table site, the time-table-collection will be cleared, then filled with data from a query function and then finally populates the table on the site.  \n\n \n\n  \nThe code works. I guess it could be a bit more elegant but ok… 😊\nThe problem is, that I am running into a time-out:\nWhen the site loads, I am getting maybe 2 of 15 entries. \nWhen I click button10/Neu it executes the function again and I am getting more and more results.  \nI changed now from a async/await to a .then function but didn’t change much. \n\n Button11/Refresh does refresh the dataset connected to the table and is not changing anything. So I guess it’s the function.\n\nFrontend:\n\nimport wixData from 'wix-data'; \nimport {GruppenKalenderReset} from 'backend/Gruppenkalender'; \nimport {GruppenKalenderAktuell} from 'backend/Gruppenkalender';  \n\n$w.onReady(async function () { \n$w('#repeater5').expand() \nGruppenKalenderReset().then(() => { \nGruppenKalenderAktuell().then(() => { \n$w('#dataset1').refresh() })}) $w('#dataset1').setFilter(wixData.filter().contains(\"title\", \"Montag\"))  });  \n\nexport function dropdown1_change(event) { \nconst filterValue = $w(\"#dropdown1\").value $w('#dataset1').setFilter(wixData.filter().contains(\"title\", filterValue)) }  \n\nexport async function button9_click(event) {     \nGruppenKalenderReset() .then(() => {     \n$w('#dataset1').refresh()}) }  \n\nexport async function button10_click(event) {     GruppenKalenderAktuell().then(() => {         \n$w('#dataset1').refresh()}) }  \n\nexport function button11_click(event) {     \n$w('#dataset1').refresh() } \nBackEnd:\n\nimport wixData from \"wix-data\";\n\nexport function GruppenKalenderReset() { \nreturn wixData.query(\"Gruppenkalender\")         \n .limit(500)         \n .find()         \n .then((results) => {             \nresults.items.forEach((item) => {                 \n item.lyra = null                 \n item.balo = null                 \n item.omego = null                 \n item.amadeo = null                 \n item.pablo = null                 \n item.tymo = null                 \n item.diego = null                 \n item.myro = null \nreturn wixData.update(\"Gruppenkalender\", item)             \n});          \n}) } \n \n \n\n\nexport function GruppenKalenderAktuell() { \nlet GruppentrainingP = \"b188f84c-bf81-4ab6-86bd-da071f430bf3\"     wixData.query(\"AktuellerBetreuer\")         \n .limit(200)         \n .ge('ende', (new Date()))         \n .eq(\"produkt\", GruppentrainingP)         \n .or(             \n   wixData.query(\"AktuellerBetreuer\")                  \n   .isEmpty('ende')             \n   .eq(\"produkt\", GruppentrainingP)         ) \n .find() // Run the query         \n.then(res => {             \nres.items.forEach((itemBT) => {  \n\nwixData.query(\"Gruppentraining\")                     \n.limit(500)                     \n.include(\"gerate\")                     \n.eq(\"aktuellerBetreuer\", itemBT._id)                     \n.find()                     \n.then((results) => {                         \nresults.items.forEach((item) => { \n\nlet TimeSplitter = item.anfang.split(\":\");  \nlet hour = (TimeSplitter[0]);  \nlet Minutes = (TimeSplitter[1]);  \nlet Time = hour.padStart(2, '0') + \":\" + Minutes.padStart(2, '0')  \nlet Geraet = item.gerate.title.toLowerCase()  \n\nwixData.query(\"Gruppenkalender\")                                 \n.limit(1)                                 \n.eq(\"title\", item.title)                                 \n.eq(\"anfang\", Time) \n.find()                                 \n.then((results2) => { \n let data = results2.items[0]  //console  //  let data = results2.  \n if (Geraet === \"lyra\") { data.lyra = item.kunde }  \n if (Geraet === \"balo\") { data.balo = item.kunde }  \n if (Geraet === \"omego\") { data.omego = item.kunde }  \n if (Geraet === \"amadeo\") { data.amadeo = item.kunde }  \n if (Geraet === \"pablo\") { data.pablo = item.kunde }  \n if (Geraet === \"tymo\") { data.tymo = item.kunde }  \n if (Geraet === \"diego\") { data.diego = item.kunde }  \n if (Geraet === \"myro\") { data.myro = item.kunde }  //console.log(data) \n  wixData.update(\"Gruppenkalender\", data)                                         .then((results3) => {  \n let item3 = results3; //see item below                                                                                     \n  })                                         \n .catch((err) => {  let errorMsg = err;                                         });                                 \n  })                         \n })                     \n  })             \n })         \n  }) } \n\n        \n\n \n                                   \n\n\nAny idea how I get this baby workin and more solid?\n\n\n",
     "userEmail": "un@atucopud.es",
     "done": false,
-    "creationTime": 1542003362796
+    "creationTime": 1542003362796,
+    "labels": ["Problem"]
   },
   {
     "title": "Display column images in gallery",
@@ -1325,7 +1392,8 @@
     "content": "So I am an artist and have 0 experience with websites at all. I am running on a limited budget and haven't made much money yet, but my gallery (and I guess me to some extent) is ranked in the top 10 in my big city (semi large state capital). I need to expand now and get a website, I am not going to sell any art off there as I am trying to stay high brow ish and am only selling at galleries and auctions, I just want to explain my art (it is very... unique) and provide images. Would six work for this? I'm just looking to show people what I am about and give a link on trip advisor as well as gove critics somewhere to look and contact me. My budget is like 300 (enough to use six but probably not a real designer) so what do you guys think https://cnv.to/",
     "userEmail": "fusom@ireruveho.er",
     "done": false,
-    "creationTime": 1517624146865
+    "creationTime": 1517624146865,
+    "labels": ["Expand"]
   },
   {
     "title": "Repeaters performance on a dynamic page",
@@ -1346,7 +1414,8 @@
     "content": " General Settings To get the access to the Google reCAPTCHA v3 settings please go to System → Configuration → Sales → Google API and expand the Google ReCaptcha section. \nEnable — Enables module Site Key — fill in an individual site key generated for your store Secret Key — fill in an individual secret key generated for your storeHow to generate Site Keys and Secret Keys — To get a Site key and a Secret key click here. \n1. Set the label; \n2. Select the needed type of Captcha ( reCAPTCHA v3 for Checkbox Type of Captcha); \n3. Define the domain of your website; \n4. Tick the Terms of use checkbox; \n5. Press the Submit button. \nCopy the keys from this page: Go back to the backend of the module. Paste the Site key and the Secret key Forms — Pick the forms that need to be protected by Captcha via multi-select control. Custom Forms — Comma separated \n\nhttps://docsbay.net/guide-for-google-recaptcha-v3",
     "userEmail": "dame@fuvcopug.bz",
     "done": false,
-    "creationTime": 1517148137111
+    "creationTime": 1517148137111,
+    "labels": ["Api", "Guidelines", "Expand"]
   },
   {
     "title": "Job scheduler - Not working",
@@ -1367,7 +1436,8 @@
     "content": "Hello this is my first forum post, so let me know if I can do anything differently in the future!\n\n\nI have a sock subscription website which sells socks every month.  In order to customize the Wix PaidPlans landing page, I have to code the page using the WixPay API.\n\nEverything works fine, even the payment goes through.  The only problem is that the  \nwixPay.startPayment function does not prompt/return a shipping address.  So I don't know where to ship the goods.  The frustrating part is that if you use the regular Wix Store, the checkout page requires both the billing and shipping addresses.  As far as I can tell, there is no way to modify the lightbox that appears in order to collect more information.\n\nPlease let me know if there is indeed a way to import shipping info from the customers using WixPay.\n\nA picture of the WixPay payment collection lightbox:\n\n\n \n\nHere is the code I am using.  Again, it works, but I just need to add the extra shipping address.\n\n\nPage Code:\n\n\n\n$w.onReady(function () {\n\n const currentPlanObject = $w(\"#dynamicDataset\").getCurrentItem();\n const planId = currentPlanObject._id;\n const planPrice = currentPlanObject.price;\n\n  $w('#button1').onClick((event) => {\n\n let user = wixUsers.currentUser;\n let isLoggedIn = user.loggedIn;\n if (!isLoggedIn) {\n      wixUsers.promptLogin().then(() => {\n        processPlan(planId, planPrice);\n      })\n    } else {\n      processPlan(planId, planPrice);\n    }\n });\n});\n\nfunction processPlan(myId) {\n\n \n    wixPaidPlans.purchasePlan(myId).then(orderObject => {\n      wixWindow.openLightbox(\"Contact\", orderObject)\n       .then((goForIt) => {\n if (goForIt) {\n         wixPay.startPayment(orderObject.wixPayOrderId);\n       }\n      });\n    })\n \n}\n \n\n\nBackend code:\n\n\n \nimport wixData from 'wix-data';\n\nexport function wixPaidPlans_onPlanPurchased(event) {\n\n // Insert a title reflecting the type of transaction, and\n // the event's order object (json) into \n // the collection's data field.\n if (event.order.price.amount === 0) {\n let orderData = {\n \"title\": \"Free plan purchased\",\n \"data\": event.order\n        };\n        wixData.insert(\"planEvents\", orderData);\n    } else {\n let orderData = {\n \"title\": \"Regular plan purchased\",\n \"data\": event.order\n        };\n        wixData.insert(\"planEvents\", orderData);\n    }\n}\n\n\n\nLink to how it would look.  This is a product page, not a subscription page, but the problem is the same:\n https://reexlmain.wixsite.com/nysc/stores/products \n\n",
     "userEmail": "guc@cugiton.td",
     "done": false,
-    "creationTime": 1525458376891
+    "creationTime": 1525458376891,
+    "labels": ["Api", "Login", "Problem"]
   },
   {
     "title": "Help with setFieldValue",

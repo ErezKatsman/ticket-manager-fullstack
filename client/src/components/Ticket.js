@@ -83,7 +83,7 @@ export default function Ticket({ ticket, hide, doneUndone }) {
         className="hideTicketButton"
         onClick={() => hide(_id)}
       >
-        <i class="fa fa-eye-slash"></i>
+        <i className="fa fa-eye-slash"></i>
       </span>
     </div>
   );
