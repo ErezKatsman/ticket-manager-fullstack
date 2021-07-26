@@ -7,6 +7,7 @@ export default function Tickets({
   hiddenTickets,
   restore,
   doneUndone,
+  labelClick,
 }) {
   return (
     <div className="tickets-section">
@@ -25,6 +26,7 @@ export default function Tickets({
               doneUndone={doneUndone}
               hide={hide}
               ticket={ticket}
+              labelClick={labelClick}
               key={index}
             />
           );

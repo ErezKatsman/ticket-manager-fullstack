@@ -5,11 +5,25 @@ const ticket = Router();
 // get request from api/tickets with query params
 ticket.get("/", (req, res) => {
   const { searchText, labels } = req.query;
+  console.log(labels);
+  console.log(searchText);
   let arr = [];
-  if (labels) arr = labels.split(",");
+  if (labels) {
+    arr = labels.split(",");
+    console.log(arr);
+    return Ticket.find({
+      $and: [{ title: new RegExp(searchText, "i") }, { labels: { $all: arr } }],
+    })
+      .then((data) => {
+        res.json(data);
+      })
+      .catch(() => {
+        res.status(500).json({ message: "oops... something went wrong" });
+      });
+  }
   console.log(arr);
   Ticket.find({
-    $and: [{ title: new RegExp(searchText, "i") }, { labels: { $all: arr } }],
+    title: new RegExp(searchText, "i"),
   })
     .then((data) => {
       res.json(data);

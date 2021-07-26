@@ -14,6 +14,8 @@ function App() {
   //resotre tickets arr
   const [restoreTickets, setRestoreTickets] = useState([]);
 
+  const [labels, setLabels] = useState([]);
+
   //function for the onSeatch event in searchArea
   const search = async (e) => {
     const searchText = e.target.value;
@@ -34,7 +36,10 @@ function App() {
   const fetchTickets = async (searchText) => {
     if (!searchText) searchText = "";
     loaderShow();
-    const res = await axios.get(`/api/tickets?searchText=${searchText}`);
+
+    const res = await axios.get(
+      `/api/tickets?searchText=${searchText}&labels=${labels.join(",")}`
+    );
     let { data } = res;
     const arr = data.filter((el) => !hiddenTickets.includes(el._id));
     loaderHide();
@@ -46,7 +51,6 @@ function App() {
   const hide = (ticketId) => {
     const newTickets = tickets.filter((ticket) => ticket._id !== ticketId);
     setTickets(newTickets);
-    console.log(tickets);
     const newHidden = hiddenTickets.slice();
     newHidden.push(ticketId);
     setHiddenTickets(newHidden);
@@ -69,15 +73,20 @@ function App() {
     setHiddenTickets([]);
   };
 
+  const labelClick = (chosenLabel) => {
+    if (chosenLabel === "All") return setLabels([]);
+    setLabels((prevLabels) => [...prevLabels, chosenLabel]);
+  };
+
   useEffect(() => {
     fetchTickets();
-  }, []);
+  }, [labels]);
 
   return (
     <div>
       <div id="loader" className="loader"></div>
       <Header />
-      <SearchArea search={search} />
+      <SearchArea search={search} tickets={tickets} labelClick={labelClick} />
       {tickets.length === 0 ? (
         <div className="no-results">
           <h1 className="no-result">No results</h1>{" "}
@@ -90,6 +99,7 @@ function App() {
           tickets={tickets}
           hide={hide}
           restore={restore}
+          labelClick={labelClick}
         />
       )}
       <Footer />

@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function Ticket({ ticket, hide, doneUndone }) {
+export default function Ticket({ ticket, hide, doneUndone, labelClick }) {
   const { title, userEmail, content, creationTime, labels, _id, done } = ticket;
 
   //function the formats creation sime to date format
@@ -71,9 +71,13 @@ export default function Ticket({ ticket, hide, doneUndone }) {
         {labels &&
           labels.map((label, index) => {
             return (
-              <span className="label" key={index}>
+              <button
+                className="label"
+                key={index}
+                onClick={() => labelClick(label)}
+              >
                 {label}
-              </span>
+              </button>
             );
           })}
       </div>

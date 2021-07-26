@@ -64,6 +64,20 @@
   position: relative;
   border-radius: 10px;
   box-shadow: 3px 4px rgb(148, 148, 148);
+  height: 10vh;
+  overflow: hidden;
+  transition: height 2s;
+}
+
+.ticket:hover {
+  height: auto;
+}
+
+/* for phones */
+@media (max-width: 900px) {
+  .ticket {
+    height: auto;
+  }
 }
 
 .labels {
