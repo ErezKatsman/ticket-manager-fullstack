@@ -78,6 +78,9 @@
   .ticket {
     max-height: fit-content;
   }
+  .ticket:hover {
+    max-height: fit-content;
+  }
 }
 
 .labels {
