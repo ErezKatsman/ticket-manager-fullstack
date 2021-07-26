@@ -64,19 +64,19 @@
   position: relative;
   border-radius: 10px;
   box-shadow: 3px 4px rgb(148, 148, 148);
-  height: 10vh;
+  max-height: 10vh;
   overflow: hidden;
-  transition: height 2s;
+  transition: 2000ms;
 }
 
 .ticket:hover {
-  height: auto;
+  max-height: 100vh;
 }
 
 /* for phones */
 @media (max-width: 900px) {
   .ticket {
-    height: auto;
+    max-height: fit-content;
   }
 }
 
