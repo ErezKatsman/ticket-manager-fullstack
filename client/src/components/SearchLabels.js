@@ -11,7 +11,6 @@ export default function SearchLabels({ chosenLabels, labelClick }) {
     "Problem",
     "Tutorial",
     "View Count",
-    "All",
   ]);
   return (
     <div className="labels_search">

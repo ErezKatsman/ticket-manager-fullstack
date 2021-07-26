@@ -74,7 +74,6 @@ function App() {
   };
 
   const labelClick = (label) => {
-    if (label === "All") return setChosenLabels([]);
     if (chosenLabels.find((chosenLabel) => chosenLabel == label)) {
       setChosenLabels(
         chosenLabels.filter((chosenLabels) => label != chosenLabels)
