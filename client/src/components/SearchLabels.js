@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 
 export default function SearchLabels({ chosenLabels, labelClick }) {
+  //all the labels
   const [labels, setLabels] = useState([
     "Corvid",
     "Api",
