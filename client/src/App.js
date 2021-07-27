@@ -13,7 +13,7 @@ function App() {
   const [tickets, setTickets] = useState(["start"]);
   //resotre tickets arr
   const [restoreTickets, setRestoreTickets] = useState([]);
-
+  //The chosenLabels
   const [chosenLabels, setChosenLabels] = useState([]);
 
   //function for the onSeatch event in searchArea
@@ -73,6 +73,7 @@ function App() {
     setHiddenTickets([]);
   };
 
+  //handle labels onclick
   const labelClick = (label) => {
     if (chosenLabels.find((chosenLabel) => chosenLabel == label)) {
       setChosenLabels(
