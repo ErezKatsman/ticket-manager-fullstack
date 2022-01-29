@@ -1,38 +1,270 @@
-.App {
+/*Header=================================================================*/
+.header {
+  color: rgb(170, 212, 240);
+  text-align: center;
+  background-color: rgb(151, 151, 151);
+  border-radius: 100px;
+  margin: 120px 20px 0px 20px;
+}
+
+.wix {
+  font-size: 50px;
+  font-family: "Concert One", cursive;
+  color: black;
+  font-style: italic;
+}
+
+.main-title {
+  font-family: "Concert One", cursive;
+  font-size: 100px;
+  margin-top: 40px;
+  margin-bottom: 0;
+}
+
+.main-subtitle {
+  font-size: xx-large;
+  margin-top: 0;
+  padding-bottom: 10px;
+}
+
+/*SearchArea=================================================================*/
+
+.search-area {
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+#searchInput {
+  border-radius: 100px;
+  font-size: 30px;
+  padding: 5px;
+  text-align: center;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
+#searchInput:hover {
+  background-color: rgb(203, 209, 218);
+}
+
+#searchInput:focus {
+  background-color: rgb(173, 194, 221);
+  outline: none;
+}
+
+/*Tickets ==> [Ticket]=================================================================*/
+
+.tickets-section {
+  margin: 30px 50px;
+}
+
+/*Ticket in Tickets*/
+
+.ticket {
+  background-color: rgb(233, 233, 233);
+  padding: 0px 10px 10px 10px;
+  margin-top: 10px;
+  position: relative;
+  border-radius: 10px;
+  box-shadow: 3px 4px rgb(148, 148, 148);
+  max-height: 10vh;
+  overflow: hidden;
+  transition: 2000ms;
+}
+
+.ticket:hover {
+  max-height: 100vh;
+}
+
+/* for phones */
+@media (max-width: 900px) {
+  .ticket {
+    max-height: fit-content;
+  }
+  .ticket:hover {
+    max-height: fit-content;
   }
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+.labels_search {
+  margin-top: 20px;
+}
+
+.labels {
+  margin: 10px;
+}
+
+.label {
+  padding: 5px 20px;
+  margin: 5px;
+  background: rgb(150, 150, 150);
+  border-radius: 5px;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+}
+
+.label:hover {
+  background: rgb(94, 94, 94);
   color: white;
 }
 
-.App-link {
-  color: #61dafb;
+.chosen_label {
+  background-color: #1b24a8;
+  color: white;
 }
 
-@keyframes App-logo-spin {
-  from {
+.chosen_label:hover {
+  background-color: #121872;
+}
+
+.mail {
+  color: black;
+  text-decoration: none;
+}
+
+.hideTicketButton {
+  position: absolute;
+  right: 15px;
+  bottom: 10px;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+}
+
+.hideTicketButton:hover {
+  font-weight: 600;
+  font-size: 20px;
+}
+
+/*counter in Tickets*/
+
+.counter {
+  padding-bottom: 5px;
+  font-size: 20px;
+}
+
+.restore {
+  background-color: rgb(83, 83, 83);
+  padding: 10px 20px;
+  border-radius: 7px;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+  border: none;
+  color: white;
+  font-weight: 700;
+}
+
+.restore:hover {
+  background-color: rgb(109, 126, 182);
+}
+
+/*done and undone in Ticket*/
+
+.done-btn {
+  background-color: rgb(123, 141, 204);
+  padding: 5px 8px;
+  margin: 10px;
+  border-radius: 3px;
+  opacity: 1;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+}
+
+.done-btn:hover {
+  background-color: rgb(150, 163, 211);
+}
+
+.done {
+  background-color: rgb(233, 233, 233, 0.4);
+  text-decoration: line-through;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+}
+
+.undone {
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+}
+
+/*Top=================================================================*/
+
+.top_section {
+  background-color: rgb(46, 46, 46);
+  color: white;
+  text-align: center;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  opacity: 0.2;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+}
+
+.top_section:hover {
+  opacity: 1;
+}
+
+.ek-logo {
+  font-size: 40px;
+  font-family: "Concert One", cursive;
+}
+
+.icons {
+  margin: 10px;
+  display: flex;
+  justify-content: space-around;
+}
+
+i:hover {
+  color: rgb(253, 35, 35);
+  font-weight: 900;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+}
+
+/*no result section=================================================================*/
+
+.no-results {
+  margin: 10px;
+  padding: 20px;
+  text-align: center;
+  background-color: rgb(148, 148, 148);
+}
+
+.no-result {
+  font-size: 80px;
+}
+
+a {
+  color: aliceblue;
+}
+
+/*loader=================================================================*/
+
+.loader {
+  position: fixed;
+  z-index: 10;
+  top: 50%;
+  left: 45%;
+  border: 16px solid #ffffff;
+  border-radius: 50%;
+  border-top: 16px solid #2896df;
+  width: 120px;
+  height: 120px;
+  -webkit-animation: spin 2s linear infinite; /* Safari */
+  animation: spin 2s linear infinite;
+}
+
+@-webkit-keyframes spin {
+  0% {
+    -webkit-transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+  }
+}
+
+@keyframes spin {
+  0% {
     transform: rotate(0deg);
   }
-  to {
+  100% {
     transform: rotate(360deg);
   }
 }
